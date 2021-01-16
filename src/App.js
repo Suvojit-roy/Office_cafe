@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       
      <Form style={{width:"70%",margin:"2% auto",padding:"2% 5%",border:"1px",borderRadius:"1rem",background:"#f8f1f1"}}>
-     <h3>Add Details</h3>
+     <h3>Add Details </h3>
      <Form.Group controlId="formBasicName">
         <Form.Label >Name</Form.Label>
         <Form.Control type="text" placeholder="Enter full name" />
