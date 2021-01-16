@@ -17,18 +17,22 @@ function App() {
         <Form.Label >Name</Form.Label>
         <Form.Control type="text" placeholder="Enter full name" />
       </Form.Group>
+
       <Form.Group controlId="formBasicOrganisation">
         <Form.Label >Organisation Name</Form.Label>
         <Form.Control type="text" placeholder="Enter organisation name" />
       </Form.Group>
+      
       <Form.Group controlId="formBasicId">
         <Form.Label >Emplopyee ID No.</Form.Label>
         <Form.Control type="number" placeholder="Enter Emplopyee ID No" />
       </Form.Group>
+      
       <Form.Group controlId="formBasicEmail">
         <Form.Label >Phone No.</Form.Label>
         <Form.Control type="number" placeholder="Enter Phone No." />
       </Form.Group>
+      
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" />
@@ -37,11 +41,9 @@ function App() {
         </Form.Text>
       </Form.Group>
 
-     
       <Form.Group>
         <Form.Label>Upload ID Card</Form.Label>
-        <Form.File id="exampleFormControlFile1" style={{
-        border:"none"}}/>       
+        <Form.File id="exampleFormControlFile1" />       
       </Form.Group>
       
       <Button variant="primary" type="submit" style={{background:"#16c79a",border:"none"}}>
