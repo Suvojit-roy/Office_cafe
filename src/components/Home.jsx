@@ -12,116 +12,238 @@ const Home=()=>{
     const [eid,seteId]=useState("");
     const [phone,setPhone]=useState("");
     const [email,setEmail]=useState("");
-    const [photo,setphoto]=useState("");
+    const [photo,setPhoto]=useState("");
     const [show, setShow] = useState(false);
-    const history=useHistory()
+    const [previewImg,setPreviewImg]=useState('');
+    const [validated, setValidated] = useState(false);
+    const history=useHistory();
     
-  
-    const showModal=()=>{
-      if(orgname===""||eid===""||phone===""||name===""||photo===""||!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)){
-        alert("Enter all the fields correctly")
-      }
-      else{
-        setShow(true)
-      }
-      
+
+    const [loading,setLoading]=useState(true);
+
+    
+
+
+    const uploadImage = (e) =>
+    {
+          e.preventDefault();
+          if(!photo)
+          {
+
+            setLoading(false);
+            alert("Upload a user image!");
+            setLoading(true);
+            return;
+          }
+          
+          setPreviewImg(URL.createObjectURL(photo));
+          setLoading(false);
+          alert("Image Uploaded");
+          setLoading(true);
+
+
     }
 
 
-    const postform=()=>{
-        alert("done")
+  const showModal = (event) => {
 
-        // fetch('/hi',{
-        //     method:"post",
-        //     headers:{
-        //         "Content-Type":"application/json"
-        //     },
-        //     body:JSON.stringify({
-        //         name,
-        //         email,
-        //         eid,
-        //         orgname,
-        //         phone,
-        //         photo
-        //     })
-        // }).then(res=>res.json())
-        // .then(data=>{
-            history.push('/success')
-        // })
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    setShow(true)
+      setValidated(true);
+  };
+
+
+    const postform=(e)=>{
+      
+        const formData=new FormData();
+        formData.append('userImage',photo);
+        formData.append('name',name);
+        formData.append('orgName',orgname);
+        formData.append('email',email);
+        formData.append('empID',eid);
+        formData.append('phone',phone);
+
+          fetch("http://localhost:5000/uploadForm",
+          {
+            method:'POST',
+            body:formData
+
+          }).then(res=>res.json())
+          .then(res=>
+            {
+                console.log(res);
+                setLoading(false);
+                // setPhoto(res.imagePath);
+                history.push({
+                  pathname: '/success',
+                  user:res.data
+              })
+            })
+          .catch(err=>{
+            alert(err.message);
+            setLoading(false);
+          })
+        
     }
   
     return (
       <div className="App">
         
-       <Form style={{width:"70%",margin:"2% auto",padding:"2% 5%",border:"1px",borderRadius:"1rem",background:"#f8f1f1"}}>
+       <Form 
+       style={{width:"70%",margin:"2% auto",padding:"2% 5%",border:"1px",borderRadius:"1rem",background:"#f8f1f1"}}
+       noValidate validated={validated}>
+
+
        <h3>Add Details </h3>
+
+
        <Form.Group controlId="formBasicName">
+
           <Form.Label >Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter full name" onChange={(event)=>setName(event.target.value)}/>
+
+          <Form.Control type="text" 
+          placeholder="Enter full name" 
+          onChange={(e)=>setName(e.target.value)} 
+          required/>
+
+
+          <Form.Control.Feedback type="invalid">Please enter your full name.</Form.Control.Feedback>
+          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        
         </Form.Group>
-  
+          
+
+
         <Form.Group controlId="formBasicOrganisation">
-          <Form.Label >Organisation Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter organisation name" onChange={(event)=>setOrgName(event.target.value)}/>
+
+        <Form.Label >Organisation Name</Form.Label>
+
+        <Form.Control type="text" 
+        placeholder="Enter organisation name" 
+        onChange={(event)=>setOrgName(event.target.value)} 
+        required/>
+
+        <Form.Control.Feedback type="invalid">Please enter your organisation name.</Form.Control.Feedback>
+        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+
         </Form.Group>
-        
-        <Form.Group controlId="formBasicId">
+
+
+
+
+
+          <Form.Group controlId="formBasicId">
+
           <Form.Label >Emplopyee ID No.</Form.Label>
-          <Form.Control type="number" placeholder="Enter Emplopyee ID No" onChange={(event)=>seteId(event.target.value)}/>
-        </Form.Group>
-        
-        <Form.Group controlId="formBasicEmail">
+
+          <Form.Control type="number" 
+          placeholder="Enter Emplopyee ID No" 
+          onChange={(event)=>seteId(event.target.value)} 
+          required/>
+
+          <Form.Control.Feedback type="invalid">Please enter your employee ID No.</Form.Control.Feedback>
+          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+
+
+          </Form.Group>
+
+
+
+
+          <Form.Group controlId="formBasicPhone">
+
           <Form.Label >Phone No.</Form.Label>
-          <Form.Control type="number" placeholder="Enter Phone No." onChange={(event)=>setPhone(event.target.value)}/>
-        </Form.Group>
-        
-        <Form.Group controlId="formBasicEmail">
+
+          <Form.Control type="number" 
+          placeholder="Enter Phone No." 
+          onChange={(event)=>setPhone(event.target.value)} required/>
+
+          <Form.Control.Feedback type="invalid">Please enter a valid phone number.</Form.Control.Feedback>
+          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+
+
+          </Form.Group>
+
+
+          <Form.Group controlId="formBasicEmail">
+
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" onChange={(event)=>setEmail(event.target.value)} value={email}/>
+
+          <Form.Control type="email" 
+          placeholder="Enter email" 
+          onChange={(event)=>setEmail(event.target.value)} 
+          required/>
+
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
           </Form.Text>
-        </Form.Group>
-  
-        <Form.Group>
+
+
+          <Form.Control.Feedback type="invalid">Please enter your correct email ID.</Form.Control.Feedback>
+          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+
+
+          </Form.Group>
+
+          <Form.Group>
+
           <Form.Label>Upload ID Card</Form.Label>
-          <Form.File id="exampleFormControlFile1" onChange={(event)=>{setphoto(event.target.value)}}/>       
-        </Form.Group>
+
+          <Form.File id="exampleFormControlFile1" 
+          onChange={(event)=>{setPhoto(event.target.files[0])}} 
+          accept=".jpg,.png,.jpeg" 
+          />       
+          </Form.Group>
+
+          <Button type="button" 
+          variant="primary" 
+          onClick={uploadImage}>Upload Image</Button>
+
+          <br/>
+          <br/>
         
-        
-        <Button variant="primary" onClick={() => showModal()}>
+        <Button variant="primary" onClick={showModal} float="right">
           Submit
         </Button>
   
-        
-      
-      </Form>
+        </Form>
+     
   
   
       
+       
         
         <Modal
+          className="modal"
           show={show}
           onHide={() => setShow(false)}
-          dialogClassName="modal-90w"
+          size="lg"
           aria-labelledby="example-custom-modal-styling-title"
         >
           <Modal.Header closeButton>
             <Modal.Title id="example-custom-modal-styling-title">
-              Check your Details
+             Details Preview
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>
-              <h3>Name:{name}</h3>
-              <h3>Organisation Name:{orgname}</h3>
-              <h3>Phone:{phone!==undefined||phone!==null?phone:`  Add Phone No.`}</h3>
-              <h3>Employee ID:{eid}</h3>
-              <h3>Email ID:{email}</h3>
-              <Button onClick={()=>postform()}>Submit</Button>
-              <Button onClick={()=>setShow(false)}>Make Changes</Button>
+
+          <p className="modalText">
+            <img src={previewImg}/>
+              <h4><span>Name:</span>{name}</h4>
+              <h4><span>Organisation Name:</span>{orgname}</h4>
+              <h4><span>Phone:</span>{phone!==undefined||phone!==null?phone:`  Add Phone No.`}</h4>
+              <h4><span>Employee ID:</span>{eid}</h4>
+              <h4><span>Email ID:</span>{email}</h4>
             </p>
           </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={postform} variant="primary">Submit</Button>
+            <Button onClick={()=>setShow(false)} variant="secondary">Make Changes</Button>
+          </Modal.Footer>
         </Modal>
   
   
