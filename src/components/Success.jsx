@@ -15,12 +15,19 @@ const [userData,setUserData]=useState('');
 useEffect(() => {
    setUserData(location.user);
    setLoading(false);
-}, [location])
+}, [])
 
 return(
     <>
-    {userData?<Jumbotron>
+    {userData?<Jumbotron 
+    style={{width:"60%",
+    border:"2px solid green",
+    margin:'10px auto',
+    left:'10%',
+    borderRadius:'10px',
+    }}>
     <h1>You have registered successfully</h1>
+    <br/>
     <p>
         Your registration details are:
         <p className="modalText">
@@ -29,10 +36,10 @@ return(
             <h4><span>Organisation Name:</span>{userData.orgName}</h4>
             <h4><span>Employee ID:</span>{userData.empID}</h4>
         </p>
-        <Button variant="primary" component={Link} to="/cafe">Browse Cafe Menu</Button>
-    </p>
-    <p>
-        <Button variant="primary">Learn more</Button>
+        <Link to="/cafepage">
+        <Button variant="primary">Browse Cafe Menu</Button>
+        </Link>
+        
     </p>
     </Jumbotron>:<Spinner animation="border" role="status" className="spinner"/>}
     </>

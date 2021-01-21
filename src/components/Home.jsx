@@ -1,6 +1,6 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button,Form,Modal } from 'react-bootstrap';
+import { Button,Form,Modal, Spinner } from 'react-bootstrap';
 
 import {useState} from 'react'
 import {BrowserRouter,Route,Switch,useHistory} from 'react-router-dom'
@@ -19,27 +19,27 @@ const Home=()=>{
     const history=useHistory();
     
 
-    const [loading,setLoading]=useState(true);
+    const [loading,setLoading]=useState(false);
 
     
 
 
     const uploadImage = (e) =>
     {
+          setLoading(true)
           e.preventDefault();
+
           if(!photo)
           {
 
             setLoading(false);
             alert("Upload a user image!");
-            setLoading(true);
             return;
           }
           
           setPreviewImg(URL.createObjectURL(photo));
           setLoading(false);
           alert("Image Uploaded");
-          setLoading(true);
 
 
     }
@@ -47,7 +47,15 @@ const Home=()=>{
 
   const showModal = (event) => {
 
+
     const form = event.currentTarget;
+    if(!photo)
+          {
+
+            setLoading(false);
+            alert("Upload a user image!");
+            return;
+          }
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
@@ -59,6 +67,7 @@ const Home=()=>{
 
     const postform=(e)=>{
       
+       setLoading(true)
         const formData=new FormData();
         formData.append('userImage',photo);
         formData.append('name',name);
@@ -67,7 +76,7 @@ const Home=()=>{
         formData.append('empID',eid);
         formData.append('phone',phone);
 
-          fetch("http://localhost:5000/uploadForm",
+          fetch("http://localhost:5000/add/uploadForm",
           {
             method:'POST',
             body:formData
@@ -76,15 +85,24 @@ const Home=()=>{
           .then(res=>
             {
                 console.log(res);
-                setLoading(false);
                 // setPhoto(res.imagePath);
-                history.push({
+                
+                if(!res.error)
+                {
+                  history.push({
                   pathname: '/success',
                   user:res.data
               })
+            }
+            else
+            {
+               setLoading(false);
+               setShow(!show);
+               alert(res.error);
+            }
             })
           .catch(err=>{
-            alert(err.message);
+            alert(err.error);
             setLoading(false);
           })
         
@@ -92,7 +110,7 @@ const Home=()=>{
   
     return (
       <div className="App">
-        
+      
        <Form 
        style={{width:"70%",margin:"2% auto",padding:"2% 5%",border:"1px",borderRadius:"1rem",background:"#f8f1f1"}}
        noValidate validated={validated}>
@@ -214,7 +232,7 @@ const Home=()=>{
      
   
   
-      
+        {loading?<Spinner animation="border" role="status" className="spinner"/>:''}
        
         
         <Modal
