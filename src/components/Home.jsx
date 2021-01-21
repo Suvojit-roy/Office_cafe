@@ -45,8 +45,9 @@ const Home=()=>{
         //         photo
         //     })
         // }).then(res=>res.json())
-        // .then(data=>{
-            history.push('/success')
+        // .then(data=>{ 
+            history.push({pathname:'/success',
+                          state:{}})
         // })
     }
   
