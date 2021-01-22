@@ -89,10 +89,7 @@ const Home=()=>{
                 
                 if(!res.error)
                 {
-                  history.push({
-                  pathname: '/success',
-                  user:res.data
-              })
+                  history.push(`/success/${res.data._id}`)
             }
             else
             {

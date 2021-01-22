@@ -1,10 +1,11 @@
 import React,{useEffect, useState} from "react";
 import { Button, Jumbotron,Spinner } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 
 const Success=(props)=>{
 
+const {id}=useParams();
 
 const location=useLocation();
 const [loading,setLoading]=useState(true);
@@ -13,8 +14,22 @@ const [userData,setUserData]=useState('');
 
 //fetch data passed from home using state in history.push 
 useEffect(() => {
-   setUserData(location.user);
-   setLoading(false);
+    console.log(id)
+    fetch(`http://localhost:5000/add/fetchDetails/${id}`,
+          {
+            method:'GET',
+
+          }).then(res=>res.json())
+          .then(res=>
+            {
+                console.log(res);
+                setUserData(res.data);
+                setLoading(false);
+            })
+          .catch(err=>{
+            setLoading(false);
+            alert(err.error);
+          })
 }, [])
 
 return(

@@ -6,7 +6,6 @@ const cors=require('cors')
 const http=require('http')
 
 
-require('./routes/userRoute');
 
 const PORT = process.env.PORT || 5000; 
 
@@ -46,6 +45,7 @@ app.use(function(req, res, next) {
 
 
 app.use("/add",require('./routes/userRoute'));
+app.use("/cafe",require('./routes/foodRoute'));
 
 
 

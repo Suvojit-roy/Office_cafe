@@ -9,13 +9,12 @@ const router=express.Router();
 const multer=require('multer');
 const User=require("../models/user");
 
-// require('../uploads/')
 
 //method to store image on disks
 //images to be stored in uploads
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './uploads/')
+      cb(null, './public/uploads/')
     },
     filename: function (req, file, cb) {
       cb(null, Date.now()+file.originalname)
@@ -80,6 +79,22 @@ router.post("/uploadForm",upload.single('userImage'),async (req,res,next)=>
                     return res.status(404).json({error:'Unscuccessfull'})
                 }
 });
+
+
+router.get("/fetchDetails/:id",(req,res)=>
+{
+
+    User.findById({_id:req.params.id}).then(user=>
+        {
+            return res.status(200).json({message:"Data fetched",data:user})
+        })
+        .catch(err=>
+            {
+                return res.json(404).json({error:'Fetch unsuccessfull'})
+            })
+
+
+})
 
 
 
