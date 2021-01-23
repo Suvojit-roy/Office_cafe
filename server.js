@@ -44,8 +44,8 @@ app.use(function(req, res, next) {
 
 
 
-app.use("/add",require('./server/routes/userRoute'));
-app.use("/cafe",require('./server/routes/foodRoute'));
+app.use("/add",require('./routes/userRoute'));
+app.use("/cafe",require('./routes/foodRoute'));
 
 
 
