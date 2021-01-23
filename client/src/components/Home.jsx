@@ -56,15 +56,36 @@ const Home=()=>{
             alert("Upload a user image!");
             return;
           }
+    
+
+
+    if(name=='' || orgname=='' || phone=='' || eid=='' || email=='')
+    {
+      alert('Fill all the fields!');
+      return;
+    }
+
+
+    if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email))
+    {
+      alert('Email is incorrect!');
+      return;
+    }
+
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+      setValidated(true);
     }
-    if(name!='' || orgname!='' || phone!='' || eid!='' || email!='')
-    setShow(true)
     else
-    alert('Fill all the fields!')
-    setValidated(true);
+    {
+      setValidated(true);
+      setShow(true)
+    }
+
+    
+
+    
   };
 
 
@@ -104,7 +125,7 @@ const Home=()=>{
             })
           .catch(err=>{
             console.log(err)
-            alert(err.error);
+            alert(err.err);
             setLoading(false);
           })
         
