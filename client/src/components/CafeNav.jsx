@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import {Navbar} from 'react-bootstrap'
 
 const CafeNav=({id})=>{
@@ -20,10 +20,9 @@ useEffect(() => {
                 console.log(res);
                 setUserName(res.data.name);
                 setUserImg(res.data.image.replace("public/", ""))
-                setLoading(false);
             })
           .catch(err=>{
-            console.log(error)
+            console.log(err)
             alert(err.error);
           })
 }, [])
