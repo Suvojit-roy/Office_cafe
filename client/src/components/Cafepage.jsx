@@ -116,7 +116,7 @@ const pay = () =>
      setLoading(false)
      clearCart();
 
-     alert("Payment Completed");
+     alert("Payment Completed...Enjoy your meal!");
    }, 3000);
 }
   //  console.log(JSON.parse(localStorage.getItem('cart')))
