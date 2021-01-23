@@ -111,12 +111,6 @@ const pay = () =>
   //  console.log(JSON.parse(localStorage.getItem('cart')))
 
 
-const check = () =>
-{
-    return cart.length==0;
-}
-
-
        
   return (
     <>
@@ -178,7 +172,7 @@ const check = () =>
                       Total:<span>Rs.{total}</span></h4>
                     <br/>
                     <Button style={{float:'right'}}
-                    onClick={pay} disabled={check}
+                    onClick={pay} disabled={cart.length==0}
                     >Proceed to Pay</Button>
                   </Card.Footer>
                 </Card>
