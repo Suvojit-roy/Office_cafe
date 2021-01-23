@@ -14,7 +14,7 @@
     margin-bottom: 10px;
 }
 
-.modalText img
+.modalText img,.success-img
 {
     position: relative;
     left:50%;

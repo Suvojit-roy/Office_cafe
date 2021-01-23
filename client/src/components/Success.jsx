@@ -9,7 +9,7 @@ const {id}=useParams();
 
 const location=useLocation();
 const [loading,setLoading]=useState(true);
-
+const [userImg,setUserImg]=useState('');
 const [userData,setUserData]=useState('');
 
 //fetch data passed from home using state in history.push 
@@ -24,6 +24,7 @@ useEffect(() => {
             {
                 console.log(res);
                 setUserData(res.data);
+                setUserImg("http://localhost:5000/"+ res.data.image.replace("public/", ""))
                 setLoading(false);
             })
           .catch(err=>{
@@ -46,7 +47,8 @@ return(
     <p>
         Your registration details are:
         <p className="modalText">
-           <h4><span>Registration ID:</span>{userData._id}</h4>
+            <img src={userImg} alt="ID Card" className="success-img"></img>
+            <h4><span>Registration ID:</span>{userData._id}</h4>
             <h4><span>Name:</span>{userData.name}</h4>
             <h4><span>Organisation Name:</span>{userData.orgName}</h4>
             <h4><span>Employee ID:</span>{userData.empID}</h4>

@@ -95,10 +95,12 @@ const Home=()=>{
             {
                setLoading(false);
                setShow(!show);
+               console.log(res.error)
                alert(res.error);
             }
             })
           .catch(err=>{
+            console.log(err)
             alert(err.error);
             setLoading(false);
           })
