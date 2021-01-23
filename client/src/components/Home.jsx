@@ -60,8 +60,11 @@ const Home=()=>{
       event.preventDefault();
       event.stopPropagation();
     }
+    if(name!='' || orgname!='' || phone!='' || eid!='' || email!='')
     setShow(true)
-      setValidated(true);
+    else
+    alert('Fill all the fields!')
+    setValidated(true);
   };
 
 
