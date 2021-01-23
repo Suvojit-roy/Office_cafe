@@ -46,7 +46,7 @@ const addToCart = (name,price,quantity) =>
    console.log(name,price)
   //  cart.push({name,price})
    const cartItems=cart;
-   var item=cartItems.find(name)
+   var item=cartItems.find(({ name }) => name === name)
    if(item) 
    {
      item.quantity=item.quantity+1;
