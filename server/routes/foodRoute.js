@@ -87,10 +87,4 @@ router.post('/foodList',(req,res)=>
 })
 
 
-router.get('/items',(req,res)=>
-{
-    Food.find().then(data=>res.status(200).json({message:"Fetched",items:data}))
-    .catch(err=>res.status(404).json({message:err}))
-})
-
 module.exports=router
