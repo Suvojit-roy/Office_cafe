@@ -11,20 +11,21 @@ const Cafepage = () => {
 
   
 const [cart,setCart]=useState([]);
-const [loading,setLoading]=useState(false)
+const [loading,setLoading]=useState(true)
 
 
   const [foodItems,setFoodItems]=useState('');
   const [total,setTotal]=useState(0);
 
   useEffect(() => {
-    fetch("http://localhost:5000/cafe/foodList",
+    fetch("/cafe/foodList",
     {
       method:'POST'
     })
     .then(res=>res.json())
     .then(res=>{
-      setFoodItems(res.items)
+      setFoodItems(res.items);
+      setLoading(false);
     })
     .catch(err=>alert(err))
 
@@ -49,26 +50,16 @@ const addToCart = (name,price) =>
    
 }
        
-const Spin = () =>
+const Spin = ({message}) =>
 {
    return (
       <LoadingOverlay
       active={loading}
       spinner
-      text='Loading your content...'
+      text={message}
       >
     </LoadingOverlay>
    )
-}
-
-
-const Checkout = () =>
-{
-    return (
-      <div>
-
-      </div>
-    )
 }
 
 const Empty = () =>
@@ -107,7 +98,8 @@ const pay = () =>
       
 
 
-      {loading?<Spin/>:''}
+      {!foodItems && loading?<Spin message="Loading Cafe Menu"/>:''}
+      {foodItems && loading?<Spin message="Processing your payment"/>:''}
         <Container style={{margin:'10px auto'}}>
           <Row>
             <Col xs={9}>

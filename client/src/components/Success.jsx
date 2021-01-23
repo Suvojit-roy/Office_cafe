@@ -15,7 +15,7 @@ const [userData,setUserData]=useState('');
 //fetch data passed from home using state in history.push 
 useEffect(() => {
     console.log(id)
-    fetch(`http://localhost:5000/add/fetchDetails/${id}`,
+    fetch(`/add/fetchDetails/${id}`,
           {
             method:'GET',
 
@@ -24,7 +24,7 @@ useEffect(() => {
             {
                 console.log(res);
                 setUserData(res.data);
-                setUserImg("http://localhost:5000/"+ res.data.image.replace("public/", ""))
+                // setUserImg("http://localhost:5000/"+ res.data.image.replace("public/", ""))
                 setLoading(false);
             })
           .catch(err=>{
@@ -47,7 +47,7 @@ return(
     <p>
         Your registration details are:
         <p className="modalText">
-            <img src={userImg} alt="ID Card" className="success-img"></img>
+            {/* <img src={userImg} alt="ID Card" className="success-img"></img> */}
             <h4><span>Registration ID:</span>{userData._id}</h4>
             <h4><span>Name:</span>{userData.name}</h4>
             <h4><span>Organisation Name:</span>{userData.orgName}</h4>

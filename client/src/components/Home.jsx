@@ -76,7 +76,7 @@ const Home=()=>{
         formData.append('empID',eid);
         formData.append('phone',phone);
 
-          fetch("http://localhost:5000/add/uploadForm",
+          fetch("/add/uploadForm",
           {
             method:'POST',
             body:formData
