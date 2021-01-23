@@ -24,7 +24,7 @@ useEffect(() => {
             {
                 console.log(res);
                 setUserData(res.data);
-                // setUserImg("http://localhost:5000/"+ res.data.image.replace("public/", ""))
+                setUserImg(res.data.image.replace("public/", ""))
                 setLoading(false);
             })
           .catch(err=>{
@@ -47,13 +47,13 @@ return(
     <p>
         Your registration details are:
         <p className="modalText">
-            {/* <img src={userImg} alt="ID Card" className="success-img"></img> */}
+            <img src={userImg} alt="ID Card" className="success-img"></img>
             <h4><span>Registration ID:</span>{userData._id}</h4>
             <h4><span>Name:</span>{userData.name}</h4>
             <h4><span>Organisation Name:</span>{userData.orgName}</h4>
             <h4><span>Employee ID:</span>{userData.empID}</h4>
         </p>
-        <Link to="/cafepage">
+        <Link to={`/cafepage/${id}`}>
         <Button variant="primary">Browse Cafe Menu</Button>
         </Link>
         

@@ -3,11 +3,12 @@ import LoadingOverlay from 'react-loading-overlay';
 import { Card, CardDeck, Col, Container,Row,Button, Spinner} from "react-bootstrap";
 
 import CafeNav from "./CafeNav";
+import { useParams } from "react-router-dom";
 
 const Cafepage = () => {
 
 
-
+const {id}=useParams();
 
   
 const [cart,setCart]=useState([]);
@@ -92,12 +93,8 @@ const pay = () =>
        
   return (
     <>
-      <CafeNav
-      //   eid={eid} eimage={eimage}
-      />
+      <CafeNav id={id}/>
       
-
-
       {!foodItems && loading?<Spin message="Loading Cafe Menu"/>:''}
       {foodItems && loading?<Spin message="Processing your payment"/>:''}
         <Container style={{margin:'10px auto'}}>
@@ -152,7 +149,7 @@ const pay = () =>
                     <h4 style={{display:'flex',justifyContent:'space-between'}}>Total:<span>Rs.{total}</span></h4>
                     <br/>
                     <Button style={{float:'right'}}
-                    onClick={()=>pay()}
+                    onClick={()=>pay()} disabled={cart==[]}
                     >Proceed to Pay</Button>
                   </Card.Footer>
                 </Card>

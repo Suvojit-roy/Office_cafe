@@ -20,7 +20,7 @@ function App() {
     <Route exact path="/success/:id">
       <Success/>
     </Route>
-    <Route exact path="/cafepage">
+    <Route exact path="/cafepage/:id">
       <Cafepage/>
     </Route>
   </Switch>

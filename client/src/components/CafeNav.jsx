@@ -1,29 +1,47 @@
 import React from 'react'
 import {Navbar} from 'react-bootstrap'
 
-const CafeNav=(props)=>{
+const CafeNav=({id})=>{
+
+
+const [userImg,setUserImg]=useState('');
+const [userName,setUserName]=useState('');
+
+//fetch data passed from home using state in history.push 
+useEffect(() => {
+    console.log(id)
+    fetch(`/add/fetchDetails/${id}`,
+          {
+            method:'GET',
+
+          }).then(res=>res.json())
+          .then(res=>
+            {
+                console.log(res);
+                setUserName(res.data.name);
+                setUserImg(res.data.image.replace("public/", ""))
+                setLoading(false);
+            })
+          .catch(err=>{
+            console.log(error)
+            alert(err.error);
+          })
+}, [])
+
+
+
 return(
     <>
         
     <Navbar bg="dark" variant="dark">
-    <Navbar.Brand href="#home">
-      <img
-        style={{borderRadius:"50%"}}
-        alt=""
-        src="https://images.pexels.com/photos/6273549/pexels-photo-6273549.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-        width="30"
-        height="30"
-        className="d-inline-block align-top"
-      />{' '}
-      Our Cafe
-    </Navbar.Brand>
+    <Navbar.Brand>Our Cafe </Navbar.Brand>
     <Navbar.Collapse className="justify-content-end">
         <Navbar.Text>
-        Signed in as: <a href="#login">show id</a>
+        Signed in as:{userName}
         </Navbar.Text>
         <img style={{borderRadius:"50%"}}
         alt=""
-        src="https://images.pexels.com/photos/6273549/pexels-photo-6273549.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500   "
+        src={userImg}
         width="30"
         height="30"
         className="d-inline-block align-top"
