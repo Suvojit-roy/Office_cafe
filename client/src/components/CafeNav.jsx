@@ -19,7 +19,7 @@ useEffect(() => {
             {
                 console.log(res);
                 setUserName(res.data.name);
-                setUserImg(res.data.image.replace("public/", ""))
+                setUserImg(res.data.image.replace("public", ""))
             })
           .catch(err=>{
             console.log(err)

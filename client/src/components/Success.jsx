@@ -24,7 +24,7 @@ useEffect(() => {
             {
                 console.log(res);
                 setUserData(res.data);
-                setUserImg(res.data.image.replace("public/", ""))
+                setUserImg(res.data.image.replace("public", ""))
                 setLoading(false);
             })
           .catch(err=>{
