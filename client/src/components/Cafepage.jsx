@@ -41,23 +41,31 @@ const [loading,setLoading]=useState(true)
 
 
 
-const addToCart = (name,price,quantity) =>
+const addToCart = (itemName,price,quantity) =>
 {
-   console.log(name,price)
-  //  cart.push({name,price})
-   const cartItems=cart;
-   var item=cartItems.find(({ name }) => name === name)
-   if(item) 
+   if(cart.length!=0)
    {
-     item.quantity=item.quantity+1;
-     item.price=item.price+price;
+      var item=cart.find(({ name }) => name === itemName)
+      console.log(item)
+      if(item) 
+      {
+        item.quantity=item.quantity+1;
+        item.price=item.price+price;
+        setTotal(total+price)
+        setCart(cart)
+        
+      }
+      else 
+      {
+        setCart([...cart,{name:itemName,price,quantity}])
+        setTotal(total+price);
+      }
    }
-   else 
+   else
    {
-     setCart([...cart,{name,price,quantity}])
-     setTotal(total+price);
+    setCart([...cart,{name:itemName,price,quantity}])
+    setTotal(total+price);
    }
-
    localStorage.setItem('cart',cart)
    
 }
@@ -78,16 +86,19 @@ const Empty = () =>
 {
     return (
       <div>
-<h2>Your Cart is Empty</h2>
+<h4>Your Cart is Empty</h4>
       </div>
     )
 }
 
 
-const deleteFromCart = (name) =>
+const deleteFromCart = (itemName) =>
 {
-    cart.filter(item=>item.name!=name);
-    setCart(cart);
+    var item=cart.find(({name})=>name===itemName)
+    var newcart=cart.filter(item=>item.name!=itemName);
+    console.log(newcart)
+    setTotal(total-item.price);
+    setCart(newcart);
 }
 
 
@@ -116,16 +127,16 @@ const pay = () =>
     <>
       <CafeNav id={id}/>
 
-      {!foodItems && loading?<Spin message="Loading Cafe Menu"/>:''}
+      {foodItems.length==0 && loading?<Spin message="Loading Cafe Menu"/>:''}
       {foodItems && loading?<Spin message="Processing your payment"/>:''}
         <Container style={{margin:'10px auto'}}>
           <Row>
-            <Col xs={9}>
+            <Col xs={8}>
             <Row>
               {foodItems!='' && foodItems.map((item)=>
                 {
                   return(
-              <Col xs={5}>
+              <Col xs={6}>
               <Card style={{marginBottom:'20px'}}>
              <Card.Img
              className="cardImage"
@@ -133,9 +144,11 @@ const pay = () =>
                src={item.image}
              />
              <Card.Body>
-               <Card.Title>{item.name}</Card.Title>
+               <Card.Title><h4>{item.name}</h4></Card.Title>
                <Card.Text>
-                 <h4 style={{display:'flex',justifyContent:'space-between'}}>Price<span>Rs.{item.price}</span></h4>
+                 <h4 style={{display:'flex',justifyContent:'space-between'}}>
+                   <h5 style={{color:'gray'}}>Price</h5>
+                   <span>Rs.{item.price}</span></h4>
                </Card.Text>
              </Card.Body>
              <Card.Footer>
@@ -150,7 +163,7 @@ const pay = () =>
             
               </Row>
               </Col>
-              <Col xs={3}>
+              <Col xs={4}>
                 <Card>
                   <Card.Title><h3 style={{textAlign:'center'}}>Cart</h3></Card.Title>
                   <Card.Body>
@@ -159,10 +172,13 @@ const pay = () =>
                 cart.map((item)=>
                 {
                    return (
-                      <div style={{display:'flex'}}>
+                      <div  style={{display:'flex',justifyContent:'space-between'}}>
+                        <h5>
                         <MdDelete onClick={()=>deleteFromCart(item.name)}/>
-                        <h5 style={{display:'flex',justifyContent:'space-between'}}>
-                          {item.name}<span>Rs.{item.price}</span></h5></div>
+                        {item.name}({item.quantity})
+                        </h5>
+                        <h5>Rs.{item.price}</h5>
+                        </div>
                    )
                 }):<Empty/>}   
                   </Card.Text>
@@ -171,6 +187,7 @@ const pay = () =>
                     <h4 style={{display:'flex',justifyContent:'space-between'}}>
                       Total:<span>Rs.{total}</span></h4>
                     <br/>
+                    {cart.length!=0?<Button onClick={clearCart}>Empty Cart</Button>:''}
                     <Button style={{float:'right'}}
                     onClick={pay} disabled={cart.length==0}
                     >Proceed to Pay</Button>
