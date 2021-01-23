@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from "react";
 import LoadingOverlay from 'react-loading-overlay';
 import { Card, CardDeck, Col, Container,Row,Button, Spinner} from "react-bootstrap";
+import {MdDelete} from 'react-icons/md';
 
 import CafeNav from "./CafeNav";
 import { useParams } from "react-router-dom";
@@ -31,7 +32,7 @@ const [loading,setLoading]=useState(true)
     .catch(err=>alert(err))
 
 
-    console.log(localStorage.getItem('cart'))
+    console.log(localStorage.getItem('cart'));
 
 
 
@@ -40,12 +41,22 @@ const [loading,setLoading]=useState(true)
 
 
 
-const addToCart = (name,price) =>
+const addToCart = (name,price,quantity) =>
 {
    console.log(name,price)
   //  cart.push({name,price})
-   setCart([...cart,{name,price}])
-   setTotal(total+price);
+   const cartItems=cart;
+   var item=cartItems.find(name)
+   if(item) 
+   {
+     item.quantity=item.quantity+1;
+     item.price=item.price+price;
+   }
+   else 
+   {
+     setCart([...cart,{name,price,quantity}])
+     setTotal(total+price);
+   }
 
    localStorage.setItem('cart',cart)
    
@@ -71,6 +82,14 @@ const Empty = () =>
       </div>
     )
 }
+
+
+const deleteFromCart = (name) =>
+{
+    cart.filter(item=>item.name!=name);
+    setCart(cart);
+}
+
 
 const clearCart = () =>
 {
@@ -127,7 +146,7 @@ const check = () =>
              </Card.Body>
              <Card.Footer>
                <Button style={{float:'right'}}
-                onClick={()=>addToCart(item.name,item.price)}
+                onClick={()=>addToCart(item.name,item.price,1)}
                >Add to Cart</Button>
              </Card.Footer>
            </Card>
@@ -146,7 +165,8 @@ const check = () =>
                 cart.map((item)=>
                 {
                    return (
-                      <div>
+                      <div style={{display:'flex'}}>
+                        <MdDelete onClick={()=>deleteFromCart(item.name)}/>
                         <h5 style={{display:'flex',justifyContent:'space-between'}}>
                           {item.name}<span>Rs.{item.price}</span></h5></div>
                    )
@@ -154,7 +174,8 @@ const check = () =>
                   </Card.Text>
                   </Card.Body>
                   <Card.Footer>
-                    <h4 style={{display:'flex',justifyContent:'space-between'}}>Total:<span>Rs.{total}</span></h4>
+                    <h4 style={{display:'flex',justifyContent:'space-between'}}>
+                      Total:<span>Rs.{total}</span></h4>
                     <br/>
                     <Button style={{float:'right'}}
                     onClick={pay} disabled={check}
