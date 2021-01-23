@@ -7,7 +7,7 @@ const http=require('http')
 const router=express.Router();
 
 const multer=require('multer');
-const User=require("../../models/user");
+const User=require("../models/user");
 
 
 //method to store image on disks

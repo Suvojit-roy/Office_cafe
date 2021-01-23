@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose=require('mongoose')
-const Food=require('../../models/food');
+const Food=require('../models/food');
 
 var items=[
     {
