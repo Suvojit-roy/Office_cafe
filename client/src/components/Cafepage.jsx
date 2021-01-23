@@ -90,11 +90,19 @@ const pay = () =>
    }, 3000);
 }
   //  console.log(JSON.parse(localStorage.getItem('cart')))
+
+
+const check = () =>
+{
+    return cart.length==0;
+}
+
+
        
   return (
     <>
       <CafeNav id={id}/>
-      
+
       {!foodItems && loading?<Spin message="Loading Cafe Menu"/>:''}
       {foodItems && loading?<Spin message="Processing your payment"/>:''}
         <Container style={{margin:'10px auto'}}>
@@ -114,7 +122,7 @@ const pay = () =>
              <Card.Body>
                <Card.Title>{item.name}</Card.Title>
                <Card.Text>
-                 <h4 style={{display:'flex',justifyContent:'space-between'}}>Price<span>{item.price}</span></h4>
+                 <h4 style={{display:'flex',justifyContent:'space-between'}}>Price<span>Rs.{item.price}</span></h4>
                </Card.Text>
              </Card.Body>
              <Card.Footer>
@@ -134,7 +142,7 @@ const pay = () =>
                   <Card.Title><h3 style={{textAlign:'center'}}>Cart</h3></Card.Title>
                   <Card.Body>
                   <Card.Text>
-                {cart!=[] ? 
+                {cart.length!=0 ? 
                 cart.map((item)=>
                 {
                    return (
@@ -149,7 +157,7 @@ const pay = () =>
                     <h4 style={{display:'flex',justifyContent:'space-between'}}>Total:<span>Rs.{total}</span></h4>
                     <br/>
                     <Button style={{float:'right'}}
-                    onClick={()=>pay()} disabled={cart==[]}
+                    onClick={pay} disabled={check}
                     >Proceed to Pay</Button>
                   </Card.Footer>
                 </Card>
