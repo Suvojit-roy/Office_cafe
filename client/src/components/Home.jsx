@@ -1,9 +1,7 @@
-import React from 'react'
+import React,{useState} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button,Form,Modal, Spinner } from 'react-bootstrap';
-
-import {useState} from 'react'
-import {BrowserRouter,Route,Switch,useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 
 
 const Home=()=>{
@@ -24,6 +22,7 @@ const Home=()=>{
     
 
 
+    //creates image URL to be displayed on the preview screen
     const uploadImage = (e) =>
     {
           setLoading(true)
@@ -45,6 +44,8 @@ const Home=()=>{
     }
 
 
+
+  //function controlling the modal open/close
   const showModal = (event) => {
 
 
@@ -59,6 +60,8 @@ const Home=()=>{
     
 
 
+    //manual and regex validation
+
     if(name=='' || orgname=='' || phone=='' || eid=='' || email=='')
     {
       alert('Fill all the fields!');
@@ -71,6 +74,9 @@ const Home=()=>{
       alert('Email is incorrect!');
       return;
     }
+
+
+    //react-bootstrap validation
 
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -89,9 +95,12 @@ const Home=()=>{
   };
 
 
+  //function which handles form data posting to the backend
     const postform=(e)=>{
       
        setLoading(true)
+
+       //formdata created
         const formData=new FormData();
         formData.append('userImage',photo);
         formData.append('name',name);
@@ -100,6 +109,8 @@ const Home=()=>{
         formData.append('empID',eid);
         formData.append('phone',phone);
 
+
+        //makes a post request to save user details in the database
           fetch("/add/uploadForm",
           {
             method:'POST',
@@ -108,29 +119,32 @@ const Home=()=>{
           }).then(res=>res.json())
           .then(res=>
             {
-                console.log(res);
-                // setPhoto(res.imagePath);
                 
                 if(!res.error)
                 {
+                  //if no error,redirected to success screen
                   history.push(`/success/${res.data._id}`)
-            }
+                }
             else
             {
+              //error is displayed on the screen otherwise.
                setLoading(false);
                setShow(!show);
-               console.log(res.error)
                alert(res.error);
             }
             })
           .catch(err=>{
-            console.log(err)
-            alert(err.err);
+            alert(err.error);
             setLoading(false);
           })
         
     }
   
+
+
+
+
+   //basic form to add all details
     return (
       <div className="App">
       

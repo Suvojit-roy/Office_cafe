@@ -3,6 +3,9 @@ const router = express.Router();
 const mongoose=require('mongoose')
 const Food=require('../models/food');
 
+
+//we have taken a fixed array of food items.We render it on the screen whenever reqd.
+
 var items=[
     {
         name:'Coffee',
@@ -48,9 +51,14 @@ var items=[
 
 
 
+
+
+//This route creates a new collection named foods and stores all the items in there.
 router.post('/foodList',(req,res)=>
 {
 
+
+    //if foods is already made ,we no longer add the items anymore
     mongoose.connection.db.collection('foods').countDocuments(function(err, count) {
         
     
@@ -68,10 +76,9 @@ router.post('/foodList',(req,res)=>
             res.status(200).json(
             {message:'Items Saved',items:data}))
             .catch(err=>res.status(404).json({error:err}))
-                
-        
-        
-            });
+             });
+
+             //simply the items are returned to the ui
         }
         else {
             Food.find()
@@ -80,6 +87,7 @@ router.post('/foodList',(req,res)=>
                 {message:'Already Saved',items:data}))
             .catch(err=>res.status(404).json({error:err}))
         }
+        //else items are saved and then returned to the UI
     });
     
     

@@ -9,6 +9,7 @@
     "bootstrap": "^4.5.3",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
+    "react-credit-cards": "^0.8.3",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
     "react-loading-overlay": "^1.0.1",

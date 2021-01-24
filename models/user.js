@@ -29,6 +29,11 @@ const UserSchema = mongoose.Schema({
     {
         type:String,
         required:true
+    },
+    regDate:
+    {
+        type:Date,
+        required:true
     }
 });
 

@@ -1,20 +1,17 @@
 import React,{useEffect, useState} from "react";
 import { Button, Jumbotron,Spinner } from "react-bootstrap";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 
 
 const Success=(props)=>{
 
 const {id}=useParams();
 
-const location=useLocation();
-const [loading,setLoading]=useState(true);
 const [userImg,setUserImg]=useState('');
 const [userData,setUserData]=useState('');
 
 //fetch data passed from home using state in history.push 
 useEffect(() => {
-    console.log(id)
     fetch(`/add/fetchDetails/${id}`,
           {
             method:'GET',
@@ -22,17 +19,18 @@ useEffect(() => {
           }).then(res=>res.json())
           .then(res=>
             {
-                console.log(res);
+                //fetched user data is saved to the corresponding fields 
                 setUserData(res.data);
-                setUserImg(res.data.image.replace("public", ""))
-                setLoading(false);
+                setUserImg(res.data.image.replace("public", ""));
             })
           .catch(err=>{
-            setLoading(false);
             alert(err.error);
           })
 }, [])
 
+
+
+//displays user data in jumbotron
 return(
     <>
     {userData?<Jumbotron 

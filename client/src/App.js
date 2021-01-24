@@ -1,14 +1,13 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
-import {useState} from 'react'
-import {BrowserRouter,Route,Switch,useHistory} from 'react-router-dom'
+import {BrowserRouter,Route,Switch} from 'react-router-dom'
 
 import Home from "./components/Home"
 import Success from "./components/Success";
 import Cafepage from "./components/Cafepage" 
 
+
+//handles the routes
 function App() {
 
   return(
