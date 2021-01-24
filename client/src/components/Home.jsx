@@ -16,7 +16,6 @@ const Home=()=>{
     const [validated, setValidated] = useState(false);
     const history=useHistory();
     
-
     const [loading,setLoading]=useState(false);
 
     
@@ -148,6 +147,10 @@ const Home=()=>{
     return (
       <div className="App">
       
+
+  
+      {loading?<Spinner animation="border" role="status" className="spinner"/>:''}
+      
        <Form 
        style={{width:"70%",margin:"2% auto",padding:"2% 5%",border:"1px",borderRadius:"1rem",background:"#f8f1f1"}}
        noValidate validated={validated}>
@@ -268,8 +271,6 @@ const Home=()=>{
         </Form>
      
   
-  
-        {loading?<Spinner animation="border" role="status" className="spinner"/>:''}
        
         
         <Modal
