@@ -149,8 +149,8 @@ const Home=()=>{
       
 
   
-      {loading?<Spinner animation="border" role="status" className="spinner"/>:''}
       
+
        <Form 
        style={{width:"70%",margin:"2% auto",padding:"2% 5%",border:"1px",borderRadius:"1rem",background:"#f8f1f1"}}
        noValidate validated={validated}>
@@ -295,6 +295,7 @@ const Home=()=>{
               <h4><span>Employee ID:</span>{eid}</h4>
               <h4><span>Email ID:</span>{email}</h4>
             </p>
+            {loading?<Spinner animation="border" role="status" className="spinner"/>:''}
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={postform} variant="primary">Submit</Button>
