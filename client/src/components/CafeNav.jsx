@@ -10,7 +10,7 @@ const [userName,setUserName]=useState('');
 //fetch data passed from home using state in history.push 
 useEffect(() => {
     console.log(id)
-    fetch(`http://localhost:5000/add/fetchDetails/${id}`,
+    fetch(`/add/fetchDetails/${id}`,
           {
             method:'GET',
 
