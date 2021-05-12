@@ -10,7 +10,7 @@ const http=require('http')
 const PORT = process.env.PORT || 8000; 
 
 mongoose.connect(process.env.MONGODB_URI || 
-    "mongodb+srv://sristi27:WJ1jcloMs2EgmE9F@cluster0.hwmrk.mongodb.net/<user>?retryWrites=true&w=majority",
+    "mongodb+srv://sristi27:<password>@cluster0.hwmrk.mongodb.net/<user>?retryWrites=true&w=majority",
 { useNewUrlParser: true, useUnifiedTopology: true},
 (err) => {
     if (!err) {
