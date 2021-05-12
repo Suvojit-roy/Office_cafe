@@ -1,0 +1,174 @@
+.cart-container .cart-content
+{
+
+    width:70%;
+    margin:0 auto;
+    background-color: white;
+    padding:30px 10px;
+    margin-top: 10px;
+}
+
+
+
+.cart-content .cart-item
+{
+    width:80%;
+    margin:0 auto;
+    display: flex;
+    /* background-color: lightgray; */
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.cart-content .title
+{
+    color:tomato;
+    text-align: center;
+    font-size: 1.9em;
+    letter-spacing:2px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.title div
+{
+    width:20%;
+    border-bottom:3px solid tomato;
+    margin:0 auto;
+}
+
+.totalAmt
+{
+    width:80%;
+    margin:0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.totalAmt h4
+{
+    letter-spacing: 1.9px;
+    margin-left:40px;
+}
+.cart-container .collection
+{
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+
+.cart-content{
+    width:100%;
+}
+
+.cart-content .collection
+{
+    padding-top: 20px;
+}
+.cart-item button
+{
+    outline: none;
+    border:none;
+    background:white;
+}
+.cart-item .remove
+{
+    height:58%;
+    padding-top:12px;
+    margin-right: 8px;
+}
+
+
+.cart-item i
+{
+    color:tomato;
+    font-size:20px;
+}
+
+.cart-item .remove i
+{
+    font-size:1.8em;
+}
+.right-text,.left-text
+{
+    display: flex;
+    height:65%;
+}
+
+
+.left-text img
+{
+    height:60px;
+    width:60px;
+}
+
+.left-text .item-desc
+{
+    margin-left: 20px;
+}
+.left-text .item-desc .name
+{
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+
+.right-text
+{
+    border:1px solid black;
+}
+
+.right-text span
+{
+    padding:8px 18px;
+}
+
+.right-text .quantity
+{
+    background-color: rgb(250, 173, 159);
+} 
+
+.cart-btn
+{
+    width:80%;
+    display: flex;
+    margin:0 auto;
+    justify-content: center;
+    justify-content: space-between;
+    padding:20px 0;
+}
+
+.cart-btn button
+{
+    outline:none;
+    border:none;
+    font-size: 1.1em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid tomato;
+    border-radius: 5px;
+    padding:10px 20px;
+    background-color: tomato;
+    color:white;
+}
+
+.back-btn
+{
+    display: block;
+    text-align: center;
+}
+
+.clear-bag
+{
+    color:tomato;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.clear-bag h1
+{
+    font-size: 2em;
+    letter-spacing: 3px;
+}

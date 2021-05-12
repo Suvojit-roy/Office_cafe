@@ -1,0 +1,555 @@
+.home-container i,button{
+    cursor:pointer
+}
+
+
+.home-container .banner
+{
+    /* position:relative; */
+    width:100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('../images/bg2.jpg'); 
+    background-size: cover;
+}
+
+
+.home-container .banner .content
+{
+  max-width: 900px;
+  text-align: center;
+}
+
+
+
+.home-container .banner .content h1
+{
+    font-size: 5em;
+    color:rgb(250, 95, 23);
+}
+
+
+.home-container .banner .content p{
+    font-size: 1em;
+    color:yellow
+}
+
+.home-container .banner .content button{
+    padding:10px 20px;
+    background-color: tomato;
+    transition: 0.5s;
+    cursor: pointer;
+    
+}
+
+
+
+.home-container .banner .content button:hover{
+    letter-spacing: 6px;
+    color:white;
+}
+
+
+.home-container .banner .content button a{
+    color:white;
+    margin-top: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+}
+
+
+
+
+
+/* //header */
+
+
+.home-container header{
+position: fixed;
+top:0;
+left: 0;
+width: 100%;
+padding:30px 100px;
+z-index: 1000;
+display: flex;
+justify-content: space-between;
+align-items: center;
+transition: 0.5s;
+
+}
+
+.home-container header.sticky
+{
+    background: white;
+    padding: 10px 100px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.home-container header .logo
+{
+    color:white;
+    font-weight: 700;
+    font-size: 2em;
+    text-decoration: none;
+}
+
+.home-container header.sticky .logo
+{
+    color:rgb(250, 95, 23);
+}
+
+header .navigation
+{
+    position: relative;
+    display:flex;
+}
+
+header .logo span img{
+    height:60px;
+    width:50px;
+    margin-left: 10px;
+}
+
+#invertLogo
+{
+    filter: invert(100%);
+}
+
+
+header .navigation li{
+    list-style: none;
+    margin-left: 30px;
+}
+
+header .navigation li a
+{
+    position: relative;
+    text-decoration: none;
+    color:white;
+    font-size:1.16em ;
+    font-weight: 400;
+}
+
+
+header.sticky .navigation li a{
+    color:rgb(250, 95, 23);
+    align-items: center;
+}
+
+
+
+header .navigation li a:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 5px;
+    bottom: 0;
+    left: 0;
+    margin-bottom: -8px;
+    background-color: white;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+  
+  header .navigation li a:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+
+  header.sticky .navigation li a::after
+  {
+      background-color: tomato;
+  }
+
+
+  /* //about */
+
+
+  section.about
+  {
+      margin-top: 100px;
+      padding:100px;
+      font-size:1.1em;
+      align-items: center;
+  }
+
+
+  .about .about-img
+  {
+      height: 100%;
+      width: 90%;
+      align-items: center;
+  }
+
+
+  .about-title
+  {
+      font-size: 1.9em;
+      font-weight: 300;
+      margin-bottom: 20px;
+  }
+
+  .about-title span{
+      color:tomato;
+      font-weight: 700;
+      font-size: 1.5em;
+  }
+
+
+
+
+  /* menu  */
+
+  section.menu
+  {
+      padding:100px;
+      text-align: center;
+  }
+
+  .menu .menu-title
+  {
+    font-size: 2.1em;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.menu-title span{
+    color:tomato;
+    font-weight: 700;
+    font-size: 1.5em;
+}
+  
+  .menu .title{
+    width:100%;
+    text-align: center;
+  }
+
+
+  .menu .menu-content{
+      display: flex;
+      justify-content: center;
+      flex-direction: row-reverse;
+      flex-wrap: wrap;
+      margin-top: 40px;
+  }
+
+
+  .menu .menu-content .box
+  {
+      width:340px;
+      margin:20px;
+      border:15px solid rgb(252, 252, 252);
+      box-shadow: 0 5px 35px rgb(197, 191, 191);
+  }
+
+  .menu .menu-content .box .imgBx
+  {
+      position: relative;
+      width: 100%;
+      height:300px;
+  }
+
+
+  .imgBx img{
+      position:absolute;
+      top:0;
+      left:0;
+      width: 100%;
+      height:100%;
+      object-fit: cover;
+  }
+
+  .menu-content .text
+  {
+      padding:12px 0 0px;
+  }
+
+
+
+
+  @media (max-width:678px)
+  {
+    .menu .menu-content{
+        
+        flex-direction: column;
+    }
+
+    .menu .menu-content .box
+    {
+        width:70%;
+        margin:0 auto;
+        margin-bottom: 20px;
+    }
+  }
+
+
+  .menu-content .text h3{
+      font-weight:600;
+      font-size:1.2em;
+      color:#111;
+  }
+
+
+.menu button{
+    padding:10px 20px;
+    margin-top: 20px;
+    text-transform: uppercase;
+    background-color: tomato;
+    color:white;
+    letter-spacing: 2px;
+    transition: 0.5s;
+}
+
+
+
+.home-container .menu button:hover{
+    letter-spacing: 6px;
+    color:white;
+}
+
+
+/* contact  */
+
+
+section.contact{
+    margin-top: 100px;
+}
+
+.contact .contact-title
+{
+    width:100%;
+    text-align:center
+}
+
+.contact-title h2
+{
+  font-size: 2.1em;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.contact-title h2 span{
+  color:tomato;
+  font-weight: 700;
+  font-size: 1.5em;
+}
+
+.contact .content h3
+{
+    font-size: 1.75rem;
+}
+
+.contact .content{
+    padding:50px  100px;
+    background-color: rgb(20, 17, 16);
+    color:white;
+    display: flex;
+    /* height:40px; */
+}
+
+.contact .content .social-icons
+{
+   
+    width: 20%;
+    text-align: left;
+    padding:40px 80px;
+    margin-left:15%;
+}
+
+.contact .content .social-icons ul{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact .social-icons ul li{
+   list-style:  none;
+   margin-bottom:20px;
+}
+
+.contact .social-icons ul li a{
+    text-decoration: none;
+}
+
+
+.contact .social-icons ul li i{
+    font-size: 23px;
+    color:rgb(253, 108, 82);
+}
+
+
+
+.contact .contact-form
+{
+    text-align:right;
+    width:50%;
+    left:40%;
+    position: relative;
+    transform: translateX(-50%);
+    /* margin:0 auto; */
+    padding:40px;
+    padding-right:0px;
+}
+
+
+.contact-form h3{
+    margin-bottom:30px;
+}
+.contact .contact-form button{
+    width:100%;
+}
+
+
+.contact-form input{
+    padding:25px 15px;
+}
+
+.contact-form button{
+    background-color: tomato;
+        color:white;
+        padding:10px 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: 0.5s;
+}
+
+
+
+.home-container .contact-form button:hover{
+    letter-spacing: 6px;
+    color:white;
+}
+
+
+/* media query */
+
+@media (max-width:991px)
+
+{
+    /* nav  */
+    header,header .sticky
+    {
+        padding:10px 20px;
+    }
+
+    header .navigation{
+        display:none;
+    }
+
+
+    header .navigation.active
+    {
+        width: 100%;
+        height:calc(100%);
+        position: fixed;
+        top:68px;
+        left:0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: white;
+
+    }
+
+    header .navigation li
+    {
+        margin-left: 0;
+    }
+
+    header .navigation.active li a
+    {
+        color:black;
+        font-size:1.8em;
+        font-weight: 300;
+    }
+
+
+    .toggle
+    {
+        position:relative;
+        width:40px;
+        height:40px;
+        background:url('../images/menu.png') no-repeat center;
+        background-size: 30px;
+        cursor: pointer;
+    }
+
+     /* .toggle.active
+     {
+        position:relative;
+        width:40px;
+        height:40px;
+        background:url('./images/menu.png') no-repeat center;
+        background-size: 30px;
+        cursor: pointer;
+     } */
+
+
+     header.sticky .toggle
+     {
+         filter:invert(1);
+     }
+
+     section
+     {
+         padding: 20px;
+     }
+
+     .banner .content h2
+     {
+        font-size: 3em;
+        color: #fff;
+     }
+
+     .about .row
+     {
+        flex-direction: column;
+     }
+
+     .contact .content .social-icons
+     {
+         margin-left: 0;
+     }
+
+     section.about
+     {
+         margin-top: 0;
+     }
+
+     .about .col-lg-7
+     {
+         margin-bottom: 30px;
+     }
+
+
+     .contact .contact-form
+     {
+        width: 100%;
+        left: 20%;
+        transform: translateX(-30%);
+     }
+
+
+     section.menu
+     {
+         padding-top: 30px;
+     }
+}
+
+
+
+@media (max-width:586px)
+{
+        .home-container header,.home-container header.sticky
+        {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+}

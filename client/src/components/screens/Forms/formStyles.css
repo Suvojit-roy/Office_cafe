@@ -1,0 +1,174 @@
+.form-container
+{
+    min-height: 100vh;
+    
+}
+.form-div
+{
+    width:100%;
+    margin:7% 0;
+    padding-top: 2%;
+}
+
+
+.form-container .banner
+{
+    background:url('./../../images/messy-pizza-on-a-black-table.jpeg') no-repeat center center;
+    background-size: cover;
+}
+.form{
+    width:60%;
+    margin:0 auto;
+    padding:2% 5%;
+    border:1px;
+    border-radius:1rem;
+    background-color: white;
+}
+
+.form .label
+{
+    color:tomato;
+    font-weight: 500;
+}
+
+.form-div .submit-btn
+{
+        background-color: tomato;
+        color:white;
+        padding:10px 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        width: 100%;
+        transition: 0.5s;
+        border:1px solid tomato
+}
+
+.form-div .upload-btn
+{
+        background-color: tomato;
+        color:white;
+        padding:5px 15px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: 0.5s;
+        border:1px solid tomato
+}
+
+
+.form-div .upload-btn:hover,.submit-btn:hover{
+    letter-spacing: 2.5px;
+}
+
+
+
+.upload-div span{
+    margin-left: 20px;
+}
+
+.form-div h3{
+    text-align: center;
+    margin:10px 0;
+    color: tomato;
+    letter-spacing: 1.2px;
+    font-size: 2.2em;
+    font-weight: 400;
+}
+
+
+
+#exampleFormControlFile1
+{
+   display: none;
+}
+
+
+.form-container .modal-text
+{
+    color:tomato
+}
+
+
+.form-submit
+{
+    margin-top: 30px;
+    text-align: center;
+}
+
+
+/* modal  */
+
+.modalImage
+{
+    width: 100%;
+    text-align: center;
+}
+
+.modal-title
+{
+    color:tomato;
+    font-size: 30px;
+    letter-spacing: 2px;
+    padding:10px 20px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.modalText{
+
+    padding:10px ;
+}
+
+
+.modalText span
+{
+    color:rgb(133, 130, 130);
+    font-size: 20px;
+    margin-right:8px;
+}
+
+.modalText h4{
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.modalImage img
+{
+    width:23%;
+    margin-bottom: 70px;
+
+}
+
+
+
+.modal-submit
+{
+        background-color: tomato;
+        color:white;
+        padding:6px 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: 0.5s;
+        font-size: 16px;
+        border:1px solid tomato
+}
+
+.modal-changes
+{
+    font-size: 16px;
+    padding:6px 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.5s;
+
+}
+@media (max-width:991px)
+{
+    .form-div
+    {
+        margin-top:100px
+    }
+
+    .form{
+        width:80%;
+    }
+}

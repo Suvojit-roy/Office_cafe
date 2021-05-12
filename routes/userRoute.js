@@ -81,13 +81,13 @@ router.post("/uploadForm",upload.single('userImage'),async (req,res,next)=>
                     return res.json({ message: "Saved Successfully",data:user })
                 })
                 .catch(err => {
-                    return res.json({error: "Save unsuccessful!" })
+                    return res.json({error:"Save Unsuccessfull!Please recheck your details." })
                 })
                 })
                 }
                 else
                 {
-                    return res.status(404).json({error:'Save Unscuccessfull'})
+                    return res.status(404).json({error:"File doesn't exist"})
                 }
 });
 

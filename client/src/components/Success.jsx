@@ -1,18 +1,25 @@
 import React,{useEffect, useState} from "react";
 import { Button, Jumbotron,Spinner } from "react-bootstrap";
 import { Link,useParams } from "react-router-dom";
+import Navbar from "./Navbar/Navbar";
+import './successStyles.css'
+import success from './images/success.jpg'
+import {connect} from 'react-redux'
 
 
-const Success=(props)=>{
+
+
+const Success=({items})=>{
 
 const {id}=useParams();
+console.log(items)
 
 const [userImg,setUserImg]=useState('');
 const [userData,setUserData]=useState('');
 
 //fetch data passed from home using state in history.push 
 useEffect(() => {
-    fetch(`/add/fetchDetails/${id}`,
+    fetch(`http://localhost:8000/add/fetchDetails/${id}`,
           {
             method:'GET',
 
@@ -32,34 +39,65 @@ useEffect(() => {
 
 //displays user data in jumbotron
 return(
-    <>
-    {userData?<Jumbotron 
-    style={{width:"60%",
-    border:"2px solid green",
-    margin:'10px auto',
-    left:'10%',
-    borderRadius:'10px',
-    }}>
-    <h1>You have registered successfully</h1>
+  <div className="success-container">
+    {userData?
+    <div
+    className="success-div">
+    <div className="success-vector">
+      <img src={success}></img>
+    </div>
     <br/>
-    <p>
-        Your registration details are:
-        <p className="modalText">
-            <img src={userImg} alt="ID Card" className="success-img"></img>
-            <h4><span>Registration ID:</span>{userData._id}</h4>
-            <h4><span>Name:</span>{userData.name}</h4>
-            <h4><span>Organisation Name:</span>{userData.orgName}</h4>
-            <h4><span>Employee ID:</span>{userData.empID}</h4>
-        </p>
-        <Link to={`/cafepage/${id}`}>
-        <Button variant="primary">Browse Cafe Menu</Button>
+    <div className="success-text">
+    <div className="reg-title">
+      <h3>Great!</h3>
+      <p className="reg-details">
+      <p>You have successfully completed your registration.
+       <br></br>Your Registration ID :<span style={{
+        fontSize:'1.4em',
+        color:'white',
+        fontWeight:'bolder'
+      }}>
+        {userData._id.substr(0,8)}
+      </span>
+      <span>(Kindly do not share this with anyone!)</span></p>
+      </p>
+      
+    </div>
+    <p className="link">
+        <Link to=
+        {{
+          pathname:`/cafepage/${id}`,
+          state:
+          {
+            items:{items}
+          }}}>
+        <Button className="browse-button"
+        >Browse Cafe Menu</Button>
         </Link>
         
     </p>
-    </Jumbotron>:<Spinner animation="border" role="status" className="spinner"/>}
-    </>
+    </div>
+    </div>:<Spinner animation="border" 
+    role="status" className="spinner"/>}
+    
+    </div>
+    
+
 )
 
 }
 
-export default Success
+
+
+
+const mapStatetoProps=(state)=>
+{
+
+  
+  return {
+    items: state.cart
+     }
+
+}
+
+export default  connect(mapStatetoProps)(Success)

@@ -1,0 +1,42 @@
+.cafe-container .banner
+{
+    /* background:url('./images/pizza.jpg'); */
+}
+
+.cafe-container .cafe-content
+{
+    margin-top: 10%;
+}
+
+
+.addToCart
+{
+        background-color: tomato;
+        color:white;
+        padding:8px 17px;
+        border:0;
+        outline:0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: 0.5s;
+        border:1px solid tomato
+}
+
+.addToCart:focus
+{
+        background-color: white;
+        color: tomato;
+        border:2px solid tomato;
+        letter-spacing: 2.2px;
+        font-size: 1.2em;
+}
+
+.addToCart:hover
+{
+        background-color: white;
+        color: tomato;
+        border:2px solid tomato;
+        border-radius: 5px;
+        letter-spacing: 2.2px;
+        font-size: 1.2em;
+}
