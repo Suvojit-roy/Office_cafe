@@ -14,7 +14,7 @@ const { v4: uuidv4 } = require('uuid');
 const PORT = process.env.PORT || 8000; 
 
 mongoose.connect(process.env.MONGODB_URI || 
-    "mongodb+srv://sristi27:270520@cluster0.hwmrk.mongodb.net/<user>?retryWrites=true&w=majority",
+    "mongodb+srv://sristi27:<password>@cluster0.hwmrk.mongodb.net/<user>?retryWrites=true&w=majority",
 { useNewUrlParser: true, useUnifiedTopology: true},
 (err) => {
     if (!err) {
