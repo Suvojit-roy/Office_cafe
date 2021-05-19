@@ -1,18 +1,15 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter,Route,Switch} from 'react-router-dom'
-
-import FormPage from "./components/screens/Forms/FormPage"
-import Success from "./components/Success";
-import Cafepage from "./components/Cafepage" 
+import FormPage from "./components/Forms/FormPage"
+import Success from "./components/Success/Success";
+import Cafepage from "./components/Cafe/Cafepage" 
 import Home from './components/Home/Home';
 import Signup from './components/auth/Signup/Signup';
 import Login from './components/auth/Login/Login';
-import Cart from './components/screens/Cart/Cart';
+import Cart from './components/Cart/Cart';
 
 import React, { useEffect, useState } from 'react';
-import  cartReducer from './cartReducer';
-import Navbar from './components/Navbar/Navbar';
 
 
 
@@ -61,7 +58,7 @@ const Routing = ()=>
     <Route exact path="/success/:id">
       <Success/>
     </Route>
-    <Route exact path="/cafepage/:id">
+    <Route exact path="/menu/:id">
       <Cafepage/>
     </Route>
     <Route exact path="/login">
@@ -69,9 +66,6 @@ const Routing = ()=>
     </Route>
     <Route exact path="/signup">
       <Signup/>
-    </Route>
-    <Route exact path="/cafepage/browse">
-      <Cafepage/>
     </Route>
     <Route exact path="/cart/:id">
       <Cart/>
@@ -140,18 +134,22 @@ function App() {
   const persistedState = loadState();
 
   const initialStore = {
-    cart:products,
+    menu:products,
     total:0,
-    addedItems:[],
+    cart:[],
     amount:0,
     persistedState
   }
   
+
+ var store;
   
-  
+  if(loadState()==undefined)
+  store=createStore(reducer,initialStore)
   
   //pass initial store
-  const store=createStore(reducer,persistedState);
+  else
+  store=createStore(reducer,persistedState);
   // const store=createStore(reducer,persistedState);
 
 

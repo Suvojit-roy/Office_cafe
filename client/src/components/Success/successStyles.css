@@ -1,0 +1,115 @@
+.success-container
+{
+    width: 100%;
+}
+.success-div
+{
+    background-color: tomato;
+    border:1px solid tomato;
+    width:55%;
+    padding:0;
+    margin:1% auto;
+    left:10%;
+
+}
+
+
+
+.success-container .success-div .success-vector
+{
+    width: 100%;
+    text-align: center;
+    background-color: white;
+}
+
+.success-container .success-div .success-text
+{
+    background-color: tomato;
+    padding:12px 50px;
+
+}
+
+.success-container .success-vector img
+{
+    width:60%;
+}
+
+
+.success-container .success-text .reg-title h3
+{
+    text-align: center;
+    color:white;
+    font-size: 2.8em;
+    font-weight: bold;
+}
+
+.success-container .success-text .reg-title .reg-details
+{
+    margin-top: 30px;
+    font-size: 1.2em;
+    color:white;
+    font-weight: 400;
+}
+
+.success-container .success-text .reg-title .reg-details span
+{
+    margin-left:10px;
+    font-size: 0.9em;
+    color:black;
+    font-weight: 400;
+}
+.success-container .success-text .browse-button
+{
+        background-color: tomato;
+        color:white;
+        padding:10px 15px;
+        text-transform: uppercase;
+        letter-spacing:1.2px;
+        transition: 0.5s;
+        border:3px solid white
+}
+
+.success-container .success-text .browse-button:hover
+{
+        background-color: white;
+        color:tomato;
+        letter-spacing:1.6px;
+        transition: 0.5s;
+}
+
+.success-container .success-text .link
+{
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+
+@media (max-width:586px)
+{
+    
+        .success-container .success-vector img
+    {
+        width:100%;
+        height: 100%;
+    }  
+
+}
+
+
+
+
+@media (max-width:991px)
+
+{
+    .success-div
+    {
+        width: 85%;
+        margin:6% auto;
+    }
+    .success-container .success-vector img
+    {
+        width:85%;
+    }   
+
+}

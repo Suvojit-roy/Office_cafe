@@ -12,11 +12,11 @@ export const reducer = (state,action) =>
   if(action.type=='DECREASE_ITEM')
   {
     let flag=false;
-    let existedItem=state.addedItems.find(item=>item.objectId==action.payload)
+    let existedItem=state.cart.find(item=>item.objectId==action.payload)
 
     //find that item and den decrease    
-    let newCart = state.addedItems.filter(item => item.objectId != action.payload);
-    let items = [...state.addedItems];
+    let newmenu = state.cart.filter(item => item.objectId != action.payload);
+    let items = [...state.cart];
     let newItems = items.filter((item) => {
           if (item.objectId === action.payload) {
               item.quantity-=1;
@@ -27,20 +27,20 @@ export const reducer = (state,action) =>
             return item;
         });
     
-        //if quantity is 0 dont return that item in the cart
+        //if quantity is 0 dont return that item in the menu
       if(flag)
       {
         return {...state,
-          addedItems:newCart,
+          cart:newmenu,
           amount:state.amount-existedItem.Price,
           total:state.total-1
         }}
       
-        //else return the updated cart
+        //else return the updated menu
       else
       {
         return {...state,
-        addedItems:newItems,
+        cart:newItems,
         amount:state.amount-existedItem.Price,
         total:state.total-1}}
     
@@ -48,8 +48,8 @@ export const reducer = (state,action) =>
 
   if(action.type=='INCREASE_ITEM')
   {
-    let addedItem=state.addedItems.find(item=>item.objectId==action.payload)
-    let items = [...state.addedItems];
+    let addedItem=state.cart.find(item=>item.objectId==action.payload)
+    let items = [...state.cart];
     
     let newItems = items.filter((item) => {
           if (item.objectId === action.payload) {
@@ -60,7 +60,7 @@ export const reducer = (state,action) =>
         });
     
     return {...state,
-        addedItems:newItems,
+        cart:newItems,
         amount:state.amount+addedItem.Price,
         total:state.total+1}
   }
@@ -69,7 +69,7 @@ export const reducer = (state,action) =>
   {
     return{
             ...state,
-            addedItems: [],
+            menu: [],
             total: 0,
             amount:0
           }
@@ -78,26 +78,28 @@ export const reducer = (state,action) =>
 
   if(action.type==="ADD_TO_CART")
   {
-    // console.log(state.addedItems,state.cart)
-    let addedItem=state.cart.find(item=>item.objectId===action.payload);
-    let existedItem=state.addedItems.find(item=>item.objectId===action.payload);
+    // console.log(state.cart,state.menu)
+    let addedItem=state.menu.find(item=>item.objectId===action.payload);
+    let existedItem=state.cart.find(item=>item.objectId===action.payload);
     // console.log(addedItem,existedItem)
     if(existedItem)
     {
-      let newCart = state.addedItems.filter(item => item.objectId != action.payload);
-      ///take out the increase quantity item
+      let newmenu = state.cart.filter(item => item.objectId != action.payload);
+      ///takes out newly added item
       existedItem.quantity = existedItem.quantity+1;
-      newCart.push(existedItem);
+      newmenu.push(existedItem);
 
-      return {...state,addedItems:newCart,
+      return {...state,
+        cart:newmenu,
         amount:state.amount+addedItem.Price,
-        total:state.total+1}
+        total:state.total+1
+      }
     }
     else
     {
        addedItem={...addedItem,quantity:1}
        return {...state,
-        addedItems:[...state.addedItems,addedItem],
+        cart:[...state.cart,addedItem],
         amount:state.amount+addedItem.Price,
         total:state.total+1
       }
@@ -106,8 +108,8 @@ export const reducer = (state,action) =>
 
   if(action.type=='REMOVE_ITEM')
   {
-    let itemToRemove= state.addedItems.find(item=>item.objectId===action.payload)
-    let new_items = state.addedItems.filter(item=> item.objectId!=action.payload)
+    let itemToRemove= state.cart.find(item=>item.objectId===action.payload)
+    let new_items = state.cart.filter(item=> item.objectId!=action.payload)
         
     //calculating the total
     let newTotal = state.total - (itemToRemove.quantity )
@@ -116,7 +118,7 @@ export const reducer = (state,action) =>
     console.log(itemToRemove)
     return{
             ...state,
-            addedItems: new_items,
+            cart: new_items,
             total: newTotal,
             amount:newAmount
           }

@@ -1,9 +1,8 @@
 import React,{useEffect, useState} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import '../Home/homeStyles.css'
-
-import blackcrockery from '../images/blackcrockery.png'
-import knifEorange from '../images/knifEorange.jpeg'
+import blackcrockery from '../../images/blackcrockery.png'
+import knifeorange from '../../images/knifEorange.jpeg'
 import {Badge} from  '@material-ui/core'
 import {connect} from 'react-redux'
 
@@ -14,25 +13,34 @@ const Navbar = ({userId,amount}) => {
 
 
 const [id,setId] = useState(userId ? userId:null); 
+const location = useLocation()
+console.log(location.pathname)
+const [loc,setLoc]=useState(location.pathname)
 
 useEffect(() => {
 
-    console.log(window.location.href)
-    console.log(amount)
+   
     window.addEventListener('scroll',function()
     {
-        const header=document.querySelector('header');
+        const header=document.querySelector('.header');
         const image=document.querySelector('.img-logo');
+        if(loc=='/cafe/:id') var icon=document.querySelector('.nav-i')
         header.classList.toggle('sticky',window.scrollY>0);
+
         if(header.classList.contains('sticky'))
         {
-            image.src=knifEorange;
+            image.src=knifeorange;
             image.id=''
+            if(loc=='/cafe/:id')
+            icon.style.color='tomato'
+            
         }
         else
         {
             image.src=blackcrockery;
             image.id='invertLogo'
+            if(loc=='/cafe/:id')
+            icon.style.color='white'
         }
         
     })
@@ -51,11 +59,12 @@ const toggleMenu = () =>
     const nav=document.querySelector('.navigation');
     menu.classList.toggle('active')
     nav.classList.toggle('active')
+    
 }
 
 
     return (
-<header className="header">
+   <header className="header">
     <a href="/" className="logo">OfficeEats
     <span>
         <img src={blackcrockery} className="img-logo" 
@@ -69,18 +78,22 @@ const toggleMenu = () =>
    
    
     <ul class="navigation">
-           <li ><a href="/">Home</a></li>
-           <li><a href="#about">About Us</a></li>
-           <li><a href="/cafepage/browse">Menu</a></li>
-           <li><a href="/addDetails">Order Now</a></li>
-           <li><a href="/login" id="last-li">Login</a></li>
+           
            {id?
            <li><Link to={`/cart/${id}`}>
                <Badge badgeContent={amount} 
                color="error">
-                    <i class="fa fa-shopping-cart"></i>
-                </Badge></Link></li>:''}
-       <hr/>
+                    <i class="fa fa-shopping-cart nav-i"></i>
+                </Badge></Link></li>:
+                <>
+                <li><a href="/">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="/addDetails">Order Now</a></li>
+                </>
+     }
+
+<li><a href="/login" id="last-li">Login</a></li>
     </ul>
 </header>
     )
@@ -92,7 +105,9 @@ const toggleMenu = () =>
 
 const mapStatetoProps=(state)=>
 {
-   return {amount:state.total}
+   return  {
+       amount:state.total
+}
 }
 
 export default connect(mapStatetoProps)(Navbar)
