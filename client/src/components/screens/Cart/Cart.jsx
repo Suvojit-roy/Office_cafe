@@ -1,16 +1,50 @@
-import React from 'react'
+
+// add react-stripe-checkout
+import React,{useState} from 'react'
 import { connect } from 'react-redux'
 import { Link, useHistory, useParams } from 'react-router-dom'
 import Navbar from '../../Navbar/Navbar';
 import './cartStyles.css'
+import StripeCheckout from 'react-stripe-checkout'
+require('dotenv').config()
 
 const Cart = ({items,amount,removeItem,decreaseItem,increaseItem,clearCart}) => {
 
+    const [product,setproduct]=useState({
+        name:"Pay now",
+        price:amount,
+        productBy:"Roy"
+      })
+
+      const makePayment=(token)=>{
+        console.log(token)
+        const body={
+          token,
+          product
+        }
+        const headers={
+          'Content-Type':'application/json'
+        }
+    
+        return fetch(`http://localhost:8000/payment`,{
+          method:"POST",
+          headers,
+          body: JSON.stringify(body)
+        })
+        .then(res=>{
+          console.log("RESPONSE",res)
+          const {status}=res;
+          console.log("STATUS",status)
+    
+        })
+        .catch(err=>{console.log(err)})
+      }
 
     let history=useHistory()
     const {id}=useParams();
 
     const CartItem = ({increase,decrease,deleteItem}) =>
+    
     
     
     items.length ?
@@ -73,6 +107,7 @@ const Cart = ({items,amount,removeItem,decreaseItem,increaseItem,clearCart}) => 
         decreaseItem(id);
     }
 
+
     
     return (
 
@@ -108,9 +143,17 @@ const Cart = ({items,amount,removeItem,decreaseItem,increaseItem,clearCart}) => 
                     Clear Cart</button>
                     <button onClick={()=>history.goBack()}>
                     Back to Menu Page</button>
+                    <StripeCheckout
+                    stripeKey="pk_test_51IpczwSH2HRN2Fzs59J5y9RUg3bWPSzsRmzfX7KqqXeJfkOHfSysZ3ZkzZ1xb6nFKoWLl9OrfhWuyTlpxUt6R5P9008Emj1q8e"
+                    token={makePayment}
+                    name="Pay for your food"
+                    amount={product.price*100}
+                    >
                     <button onClick={()=>clearCart()}>
+
                     Proceed To Pay
                     </button>
+                    </StripeCheckout>
                    </div>
             </div>
             :<div className="cart-btn back-btn">
@@ -119,9 +162,15 @@ const Cart = ({items,amount,removeItem,decreaseItem,increaseItem,clearCart}) => 
     </div>
 </div>
         </section>
+        
+        
         </div></div>
 
+
+
     )
+
+
 }
 
 const mapStateToProps = (state)=>{
@@ -158,4 +207,6 @@ const mapDispatchToProps = (dispatch)=>{
         }
     }
 }
+
+
 export default connect(mapStateToProps,mapDispatchToProps)(Cart)

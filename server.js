@@ -1,16 +1,20 @@
+
+// add uuid stripe
+
 const express=require('express');
 const bodyparser=require('body-parser');
 const mongoose=require('mongoose');
 const path=require('path')
 var cors=require('cors')
 const http=require('http')
-
+const stripe=require("stripe")("sk_test_51IpczwSH2HRN2Fzs9KpJpmMH3VCqaAMVsHLn4g97qdCm3FFjNHKjnESbnWUuOegnC1FHCI6l9OxqY3fr5CBvVqXf007qCfTJBN")
+const { v4: uuidv4 } = require('uuid');
 
 
 const PORT = process.env.PORT || 8000; 
 
 mongoose.connect(process.env.MONGODB_URI || 
-    "mongodb+srv://sristi27:<password>@cluster0.hwmrk.mongodb.net/<user>?retryWrites=true&w=majority",
+    "mongodb+srv://sristi27:270520@cluster0.hwmrk.mongodb.net/<user>?retryWrites=true&w=majority",
 { useNewUrlParser: true, useUnifiedTopology: true},
 (err) => {
     if (!err) {
@@ -46,6 +50,7 @@ app.use(function(req, res, next) {
 
 app.use("/add",require('./routes/userRoute'));
 app.use("/cafe",require('./routes/foodRoute'));
+app.use("/payment",require('./routes/paymentRoute'));
 
 
 
