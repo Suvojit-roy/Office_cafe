@@ -4,7 +4,7 @@ const mongoose=require('mongoose');
 const path=require('path')
 var cors=require('cors')
 const http=require('http')
-const stripe=require("stripe")(<stripeID>)
+const stripe=require("stripe")("sk_test_51IpczwSH2HRN2Fzs9KpJpmMH3VCqaAMVsHLn4g97qdCm3FFjNHKjnESbnWUuOegnC1FHCI6l9OxqY3fr5CBvVqXf007qCfTJBN")
 const { v4: uuidv4 } = require('uuid');
 
 
