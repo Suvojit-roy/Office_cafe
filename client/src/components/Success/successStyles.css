@@ -85,27 +85,21 @@
 
 
 
-@media (max-width:586px)
-{
-    
-        .success-container .success-vector img
-    {
-        width:100%;
-        height: 100%;
-    }  
-
-}
-
 
 
 
 @media (max-width:991px)
 
 {
+    .success-container .success-div .success-text
+    {
+        padding:12px 25px;
+
+    }
     .success-div
     {
         width: 85%;
-        margin:6% auto;
+        margin:2% auto;
     }
     .success-container .success-vector img
     {
@@ -113,3 +107,25 @@
     }   
 
 }
+
+@media (max-width:586px)
+{
+    .success-container .success-div .success-text
+    {
+        padding:12px 15px;
+
+    }
+    .success-div
+    {
+        width: 85%;
+        margin:2% auto;
+    }
+
+    .success-container .success-vector img
+    {
+        width:100%;
+        height: 100%;
+    }  
+
+}
+

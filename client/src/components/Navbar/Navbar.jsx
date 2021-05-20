@@ -16,31 +16,47 @@ const location = useLocation()
 const [loc,setLoc]=useState(location.pathname)
 const [name,setName]=useState(userName?userName:'')
 
+console.log(location.pathname)
+
 useEffect(() => {
 
    window.onload= function ()
    {
     window.addEventListener("scroll", ()=>
     {
-        var header,image,icon
+        var header,image,icon,nameSel
         header = document.getElementById('head');
         image=document.querySelector('.img-logo');
-        if(loc=='/cafe/:id') icon=document.querySelector('.nav-i')
+
+        //for cart page only
+        if(loc==`/menu/${id}`) 
+        {
+            icon=document.querySelector('.nav-i')
+            nameSel=document.querySelector('#user')
+        }
+
+        //when you scroll window
         header.classList.toggle('sticky',window.scrollY>0);
             if(header.classList.contains('sticky'))
             {
                        image.src=knifeorange;
                        image.id=''
-                       if(loc=='/cafe/:id')
-                       icon.style.color='tomato'
+                       if(nameSel && icon)
+                        { 
+                          icon.style.color="tomato"
+                          nameSel.style.color="tomato"
+                        }
                        
             }
             else
             {
                        image.src=blackcrockery;
                        image.id='invertLogo'
-                       if(loc=='/cafe/:id')
-                       icon.style.color='white'
+                       if(nameSel && icon)
+                       {
+                           icon.style.color="white"
+                           nameSel.style.color="white"
+                       }
             }
         
     })
@@ -82,8 +98,8 @@ const toggleMenu = () =>
    
     <ul class="navigation">
            
-           {id?
-           <><li>Signed in as {name}</li>
+           {id && name?
+           <><li id="user">Signed in as {name}</li>
            <li><Link to={`/cart/${id}`}>
                <Badge badgeContent={amount} 
                color="error">
