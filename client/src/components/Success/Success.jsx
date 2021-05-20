@@ -15,6 +15,7 @@ console.log(items)
 
 const [userImg,setUserImg]=useState('');
 const [userData,setUserData]=useState('');
+const [name,setName]=useState('')
 
 //fetch data passed from home using state in history.push 
 useEffect(() => {
@@ -27,6 +28,7 @@ useEffect(() => {
             {
                 //fetched user data is saved to the corresponding fields 
                 setUserData(res.data);
+                setName(res.data.name)
                 setUserImg(res.data.image.replace("public", ""));
             })
           .catch(err=>{
@@ -68,6 +70,7 @@ return(
           pathname:`/menu/${id}`,
           state:
           {
+            name:{name},
             items:{items}
           }}}>
         <Button className="browse-button"

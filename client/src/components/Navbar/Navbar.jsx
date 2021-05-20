@@ -9,13 +9,12 @@ import {connect} from 'react-redux'
 import './navbarStyles.css'
 
 
-const Navbar = ({userId,amount}) => {
-
+const Navbar = ({userId,amount,userName}) => {
 
 const [id,setId] = useState(userId ? userId:null); 
 const location = useLocation()
-console.log(location.pathname)
 const [loc,setLoc]=useState(location.pathname)
+const [name,setName]=useState(userName?userName:'')
 
 useEffect(() => {
 
@@ -84,11 +83,12 @@ const toggleMenu = () =>
     <ul class="navigation">
            
            {id?
+           <><li>Signed in as {name}</li>
            <li><Link to={`/cart/${id}`}>
                <Badge badgeContent={amount} 
                color="error">
                     <i class="fa fa-shopping-cart nav-i"></i>
-                </Badge></Link></li>:
+                </Badge></Link></li></>:
                 <>
                 <li><a href="/">Home</a></li>
                 <li><a href="#about">About Us</a></li>
