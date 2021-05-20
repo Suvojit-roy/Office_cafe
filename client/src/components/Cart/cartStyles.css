@@ -2,10 +2,10 @@
 {
 
     width:70%;
-    margin:0 auto;
+    margin:20px auto;
     background-color: white;
     padding:30px 10px;
-    margin-top: 10px;
+    margin-top:100px;
 }
 
 
@@ -17,6 +17,7 @@
     /* max-width:100vw; */
 
 }
+
 .cart-content .cart-item
 {
     width:80%;
@@ -178,15 +179,107 @@
     letter-spacing: 3px;
 }
 
+@media screen and (max-width:1150px)
+{
+
+   
+  .cart-container .collection
+  {
+       width:100%;
+  }
+
+   
+    .left-text
+    {
+        padding:0
+    }
+
+    .cart-btn
+    {
+        width:100%;
+        /* justify-content: center; */
+        justify-content: space-evenly; 
+        padding:20px 0;
+    }
+
+    .cart-btn button
+    {
+        font-size: 1.1em;
+        letter-spacing: 1px;
+        border-radius: 5px;
+        padding:10px 10px;
+    }
+
+    .cart-btn:not(:last-child)
+    {
+        margin-right:6px;
+    }
+
+    .left-text .item-desc .name
+    {
+        font-size:1.4em;
+    }
+
+    .right-text span
+    {
+        padding:8px 10px;
+    }
 
 
-@media screen and (max-width:678px)
+    .cart-item .remove
+    {
+        margin-right:4px;
+    }
+
+    .title div
+    {
+        width:60%;
+    }
+}
+
+
+@media  screen and (max-width:905px) {
+
+    .cart-container .cart-content
+    {
+
+        width:85%;
+        background-color: white;
+    }
+
+     .cart-content .cart-item
+    {
+        width:90%;
+        margin:10px auto;
+    }
+    
+}
+
+@media screen and (max-width:700px)
 {
 
     .cart-container .cart-content
     {
 
-        width:90%;
+        width:89%;
+        background-color: white;
+    }
+
+    .cart-btn button
+    {
+        font-size:1em;
+        letter-spacing: 0;
+        border-radius: 5px;
+        padding:10px 10px;
+    }
+}
+@media screen and (max-width:568px)
+{
+
+    .cart-container .cart-content
+    {
+
+        width:98%;
         background-color: white;
     }
 
@@ -236,7 +329,6 @@
         padding:8px 10px;
     }
 
-
     .cart-item .remove
     {
         margin-right:4px;
@@ -245,5 +337,33 @@
     .title div
     {
         width:60%;
+    }
+}
+
+
+@media screen and (max-width:400px)
+{
+    .cart-content .cart-item
+    {
+        width:97%;
+    }
+
+    .cart-container .cart-content
+    {
+
+        width:99%;
+    }
+
+    .cart-btn button
+    {
+        font-size: 0.8em;
+        letter-spacing: 0;
+        padding:10px 3px;
+        text-transform: capitalize;
+    }
+
+    .totalAmt
+    {
+        width:90%;
     }
 }

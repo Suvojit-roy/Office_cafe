@@ -19,34 +19,38 @@ const [loc,setLoc]=useState(location.pathname)
 
 useEffect(() => {
 
-   
-    window.addEventListener('scroll',function()
+   window.onload= function ()
+   {
+    window.addEventListener("scroll", ()=>
     {
-        const header=document.querySelector('.header');
-        const image=document.querySelector('.img-logo');
-        if(loc=='/cafe/:id') var icon=document.querySelector('.nav-i')
+        var header,image,icon
+        header = document.getElementById('head');
+        image=document.querySelector('.img-logo');
+        if(loc=='/cafe/:id') icon=document.querySelector('.nav-i')
         header.classList.toggle('sticky',window.scrollY>0);
-
-        if(header.classList.contains('sticky'))
-        {
-            image.src=knifeorange;
-            image.id=''
-            if(loc=='/cafe/:id')
-            icon.style.color='tomato'
-            
-        }
-        else
-        {
-            image.src=blackcrockery;
-            image.id='invertLogo'
-            if(loc=='/cafe/:id')
-            icon.style.color='white'
-        }
+            if(header.classList.contains('sticky'))
+            {
+                       image.src=knifeorange;
+                       image.id=''
+                       if(loc=='/cafe/:id')
+                       icon.style.color='tomato'
+                       
+            }
+            else
+            {
+                       image.src=blackcrockery;
+                       image.id='invertLogo'
+                       if(loc=='/cafe/:id')
+                       icon.style.color='white'
+            }
         
     })
 
-    toggleMenu();
 
+    toggleMenu();
+   }
+    
+       
 
 }, [])
 
@@ -64,7 +68,7 @@ const toggleMenu = () =>
 
 
     return (
-   <header className="header">
+   <header className="header" id="head">
     <a href="/" className="logo">OfficeEats
     <span>
         <img src={blackcrockery} className="img-logo" 

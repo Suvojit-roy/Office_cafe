@@ -96,7 +96,7 @@ function App() {
     try {
       const serializedState = JSON.stringify(state);
       localStorage.setItem('state', serializedState);
-      console.log(serializedState)
+      // console.log(serializedState)
     } catch(err) {
       console.log(err)
     }
@@ -156,9 +156,9 @@ function App() {
   store.subscribe(() => {
     saveState({
      /* example state */
-      cart:store.getState().cart,
+      menu:store.getState().menu,
       total:store.getState().total,
-      addedItems:store.getState().addedItems,
+      cart:store.getState().cart,
       amount: store.getState().amount
     });
   });

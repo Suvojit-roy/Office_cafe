@@ -12,11 +12,11 @@ const Cafepage = ({addItemToCart}) => {
 
 //get extra data passed from success page
 const location = useLocation()
+console.log(location)
 
 const {id}=useParams();
 const [loading,setLoading]=useState(true)
-const [foodItems,setFoodItems]=
-useState(location.state?location.state.items.items:[]);
+const [foodItems,setFoodItems]=useState(location.state?location.state.items.items:[]);
 
 
 

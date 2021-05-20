@@ -12,7 +12,7 @@ export const reducer = (state,action) =>
   if(action.type=='DECREASE_ITEM')
   {
     let flag=false;
-    let existedItem=state.cart.find(item=>item.objectId==action.payload)
+    let existedItem=state.menu.find(item=>item.objectId==action.payload)
 
     //find that item and den decrease    
     let newmenu = state.cart.filter(item => item.objectId != action.payload);
@@ -48,7 +48,7 @@ export const reducer = (state,action) =>
 
   if(action.type=='INCREASE_ITEM')
   {
-    let addedItem=state.cart.find(item=>item.objectId==action.payload)
+    let addedItem=state.menu.find(item=>item.objectId==action.payload)
     let items = [...state.cart];
     
     let newItems = items.filter((item) => {
@@ -65,11 +65,13 @@ export const reducer = (state,action) =>
         total:state.total+1}
   }
 
+
+
   if(action.type=='CLEAR_CART')
   {
     return{
             ...state,
-            menu: [],
+            cart: [],
             total: 0,
             amount:0
           }
@@ -108,7 +110,7 @@ export const reducer = (state,action) =>
 
   if(action.type=='REMOVE_ITEM')
   {
-    let itemToRemove= state.cart.find(item=>item.objectId===action.payload)
+    let itemToRemove= state.menu.find(item=>item.objectId===action.payload)
     let new_items = state.cart.filter(item=> item.objectId!=action.payload)
         
     //calculating the total
