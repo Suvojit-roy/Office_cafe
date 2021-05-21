@@ -30,7 +30,7 @@ const Cart = ({items,amount,removeItem,decreaseItem,increaseItem,clearCart}) => 
           'Content-Type':'application/json'
         }
     
-        return fetch(`http://localhost:8000/payment`,{
+        return fetch('/payment',{
           method:"POST",
           headers,
           body: JSON.stringify(body)

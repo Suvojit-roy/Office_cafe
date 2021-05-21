@@ -91,7 +91,7 @@ const FormPage=()=>{
 
 
         //makes a post request to save user details in the database
-          fetch("http://localhost:8000/add/uploadForm",
+          fetch("/uploadForm",
           {
             method:'POST',
             body:formData
