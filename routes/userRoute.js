@@ -45,9 +45,7 @@ const User=require("../models/user");
 router.post("/uploadForm",async (req,res,next)=>
 {
     const {name,email,orgName,phone,empID}=req.body;
-    if(req.file)
-    {
-        //extract path of image stored in uploads
+     //extract path of image stored in uploads
         // const pathName=req.file.path;
           
         //create a new user
@@ -84,12 +82,13 @@ router.post("/uploadForm",async (req,res,next)=>
                     return res.json({error:"Save Unsuccessfull!Please recheck your details." })
                 })
                 })
-                }
-                else
-                {
-                    return res.status(404).json({error:"File doesn't exist"})
-                }
-});
+                
+                // else
+                // {
+                //     return res.status(404).json({error:"File doesn't exist"})
+                // }
+
+            });
 
 
 router.get("/fetchDetails/:id",(req,res)=>
