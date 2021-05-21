@@ -40,15 +40,15 @@ var upload = multer({
  });
 
 
+//  upload.single('userImage')
 
-
-router.post("/uploadForm",upload.single('userImage'),async (req,res,next)=>
+router.post("/uploadForm",async (req,res,next)=>
 {
     const {name,email,orgName,phone,empID}=req.body;
     if(req.file)
     {
         //extract path of image stored in uploads
-        const pathName=req.file.path;
+        // const pathName=req.file.path;
           
         //create a new user
         //new user is created if and only if there is no exsiting user with the same email id
@@ -67,7 +67,7 @@ router.post("/uploadForm",upload.single('userImage'),async (req,res,next)=>
                                     empID,
                                     orgName,
                                     phone,
-                                    image:pathName,
+                                    // image:pathName,
                                     regDate:new Date()
                                 
                             })
