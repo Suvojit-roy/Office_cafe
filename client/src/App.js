@@ -112,7 +112,7 @@ function App() {
   useEffect(() => {
 
 
-    fetch("http://localhost:8000/cafe/foodList",
+    fetch("/cafe/foodList",
     {
       method:'GET'
     })
