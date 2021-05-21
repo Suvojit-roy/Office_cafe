@@ -16,8 +16,6 @@ const location = useLocation()
 const [loc,setLoc]=useState(location.pathname)
 const [name,setName]=useState(userName?userName:'')
 
-console.log(location.pathname)
-
 useEffect(() => {
 
    window.onload= function ()

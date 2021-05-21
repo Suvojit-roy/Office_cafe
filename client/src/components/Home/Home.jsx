@@ -19,12 +19,11 @@ const Home = () => {
     useEffect(()=>
     {
             setLoading(true)
-            fetch("http://localhost:8000/cafe/foodList",
+            fetch("/cafe/foodList",
             {
                 method:'get'
             }).then(res=>res.json())
             .then(res=>{
-                console.log(res)
                 setMenu(res.data.results.slice(1,7))
                 setLoading(false);
             })
