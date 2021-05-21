@@ -44,6 +44,7 @@ const User=require("../models/user");
 
 router.post("/uploadForm",async (req,res,next)=>
 {
+    console.log(req.body)
     const {name,email,orgName,phone,empID}=req.body;
      //extract path of image stored in uploads
         // const pathName=req.file.path;
@@ -73,7 +74,7 @@ router.post("/uploadForm",async (req,res,next)=>
 
                         //else new user is created and stored in users collection
 
-
+            console.log(user)
             user.save().then(user => 
                 {
                     return res.json({ message: "Saved Successfully",data:user })

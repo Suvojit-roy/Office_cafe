@@ -82,19 +82,24 @@ const FormPage=()=>{
 
        //formdata created
         const formData=new FormData();
-        formData.append('userImage',photo);
-        formData.append('name',name);
-        formData.append('orgName',orgname);
-        formData.append('email',email);
-        formData.append('empID',eid);
-        formData.append('phone',phone);
+        // formData.append('userImage',photo);
+        // formData.append('name',name);
+        // formData.append('orgName',orgname);
+        // formData.append('email',email);
+        // formData.append('empID',eid);
+        // formData.append('phone',phone);
 
+        // console.log(formData)
+        // console.log(photo)
 
         //makes a post request to save user details in the database
           fetch("/add/uploadForm",
           {
             method:'POST',
-            body:formData
+            headers:{
+              'Content-Type':'application/json'
+            },
+            body:JSON.stringify({name,email,empID:eid,orgName:orgname,phone})
 
           }).then(res=>res.json())
           .then(res=>
