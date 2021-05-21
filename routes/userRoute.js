@@ -12,32 +12,32 @@ const User=require("../models/user");
 
 //method to store image on disks
 //images to be stored in uploads
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, './public/uploads/')
-      //stored in this detination
-    },
-    filename: function (req, file, cb) {
-      cb(null, Date.now()+file.originalname)
-    }
-  });
+// var storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//       cb(null, './public/uploads/')
+//       //stored in this detination
+//     },
+//     filename: function (req, file, cb) {
+//       cb(null, Date.now()+file.originalname)
+//     }
+//   });
 
 
 
   //this function checks if image type is jpeg/png
-  const filterImage=(req, file, cb)=>{
-   if(file.mimetype ==='image/jpeg' || file.mimetype ==='image/png'){
-       cb(null,true);
-   }else{
-       cb(null, false);
-   }
+//   const filterImage=(req, file, cb)=>{
+//    if(file.mimetype ==='image/jpeg' || file.mimetype ==='image/png'){
+//        cb(null,true);
+//    }else{
+//        cb(null, false);
+//    }
 
-  }
+//   }
 
-var upload = multer({ 
-    storage:storage,
-    fileFilter:filterImage
- });
+// var upload = multer({ 
+//     storage:storage,
+//     fileFilter:filterImage
+//  });
 
 
 //  upload.single('userImage')
