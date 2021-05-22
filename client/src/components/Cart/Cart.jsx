@@ -1,5 +1,5 @@
 // add react-stripe-checkout
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { connect } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import Navbar from '../Navbar/Navbar';
@@ -12,6 +12,8 @@ const Cart = ({items,amount,removeItem,decreaseItem,increaseItem,clearCart}) => 
 
     let history=useHistory()
     const {id}=useParams();
+    const [data,setData]=useState('')
+    const [order,setOrder]=useState(false)
 
     const [product,setproduct]=useState({
         name:"Pay now",
@@ -19,9 +21,70 @@ const Cart = ({items,amount,removeItem,decreaseItem,increaseItem,clearCart}) => 
         productBy:"Roy"
       })
 
+
+      useEffect(() => {
+        fetch(`/add/fetchDetails/${id}`,
+        {
+          method:'GET',
+
+        }).then(res=>res.json())
+        .then(res=>
+          {
+              setData(res.data.email);
+          })
+        .catch(err=>{
+          console.log(err);
+        })
+      }, [])
+
+
+
+      const sendEmail = () =>
+      {
+         fetch('/send',
+         {
+             method:'post',
+             headers:
+             {
+                 'Content-Type':'application/json'
+             },
+             body:
+             JSON.stringify({
+                 to:data,
+                 subject:'Congratulations🎉!',
+                 html:'<p>Your Order has been Placed.<br/>\
+                 Thank you for giving us an opportunity to serve you!\
+                 </p>\
+                 <h4>Your meal is being preapred and will be delivered at your desk within an \
+                 hour.Stay healthy,eat healthy!</h4>\
+                 <br/>\
+                 <strong>Keep ordering!</strong></p>\
+                 <br/>\
+                 <strong>Thank you,<br/>\
+                 <strong>Team OfficeEats.</strong>'
+             })
+         }).then(res=>res.json())
+         .then(res=>
+            {
+                if(res.error)
+                {
+                    alert(res.error)
+                }
+                else
+                {
+                    history.push(`/orderPlaced/${id}`);
+                    setOrder(false);
+                }
+            })
+         .catch(err=>console.log(err))
+      }
+
+
+
+
       const makePayment=(token)=>{
 
-        console.log(token)
+        setOrder(true)
         const body={
           token,
           product
@@ -39,10 +102,14 @@ const Cart = ({items,amount,removeItem,decreaseItem,increaseItem,clearCart}) => 
           console.log("RESPONSE",res)
           const {status}=res;
           console.log("STATUS",status)
+          sendEmail();
           clearCart();
-    
         })
-        .catch(err=>{console.log(err)})
+        .catch(err=>
+            {
+                setOrder(false)
+                alert("Order could not be placed!Please try again..")
+            })
       }
 
 
@@ -121,10 +188,13 @@ const Cart = ({items,amount,removeItem,decreaseItem,increaseItem,clearCart}) => 
 
         
         <div className="home-container cart-container">
+        
             <Navbar userId={id}/>
         
         <section className="banner" id="banner">
+
             <div className="cart-content">
+            {order?<div>Order Payment is being processed</div>:''}
            {items.length>0 ? 
            <h5 className="title">Order Summary<div></div></h5>:''}
             <div className="collection">

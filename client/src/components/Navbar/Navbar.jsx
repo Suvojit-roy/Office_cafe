@@ -9,14 +9,28 @@ import {connect} from 'react-redux'
 import './navbarStyles.css'
 
 
-const Navbar = ({userId,amount,userName}) => {
+const Navbar = ({userId,amount}) => {
 
-const [id,setId] = useState(userId ? userId:null); 
 const location = useLocation()
 const [loc,setLoc]=useState(location.pathname)
-const [name,setName]=useState(userName?userName:'')
+const [data,setData]=useState('')
 
 useEffect(() => {
+
+    fetch(`/add/fetchDetails/${userId}`,
+        {
+          method:'GET',
+
+        }).then(res=>res.json())
+        .then(res=>
+          {
+              setData(res.data);
+          })
+        .catch(err=>{
+          console.log(err);
+        })
+
+
 
    window.onload= function ()
    {
@@ -27,11 +41,7 @@ useEffect(() => {
         image=document.querySelector('.img-logo');
 
         //for cart page only
-        if(loc==`/menu/${id}`) 
-        {
-            icon=document.querySelector('.nav-i')
-            nameSel=document.querySelector('#user')
-        }
+        
 
         //when you scroll window
         header.classList.toggle('sticky',window.scrollY>0);
@@ -39,28 +49,15 @@ useEffect(() => {
             {
                        image.src=knifeorange;
                        image.id=''
-                       if(nameSel && icon)
-                        { 
-                          icon.style.color="tomato"
-                          nameSel.style.color="tomato"
-                        }
-                       
             }
             else
             {
                        image.src=blackcrockery;
                        image.id='invertLogo'
-                       if(nameSel && icon)
-                       {
-                           icon.style.color="white"
-                           nameSel.style.color="white"
-                       }
             }
         
     })
 
-
-    toggleMenu();
    }
     
        
@@ -96,9 +93,10 @@ const toggleMenu = () =>
    
     <ul class="navigation">
            
-           {id && name?
-           <><li id="user">Signed in as {name}</li>
-           <li><Link to={`/cart/${id}`}>
+           {loc===`/menu/${userId}` || loc===`/cart/${userId}`
+           || loc===`/orderPlaced/${userId}`?
+           <><li id="user">Signed in as {data.name}</li>
+           <li><Link to={`/cart/${userId}`}>
                <Badge badgeContent={amount} 
                color="error">
                     <i class="fa fa-shopping-cart nav-i"></i>

@@ -9,18 +9,18 @@ export const reducer = (state,action) =>
   // console.log({state,action})
 
 
-  if(action.type=='DECREASE_ITEM')
+  if(action.type==='DECREASE_ITEM')
   {
     let flag=false;
-    let existedItem=state.menu.find(item=>item.objectId==action.payload)
+    let existedItem=state.menu.find(item=>item.objectId===action.payload)
 
     //find that item and den decrease    
-    let newmenu = state.cart.filter(item => item.objectId != action.payload);
+    let newmenu = state.cart.filter(item => item.objectId !== action.payload);
     let items = [...state.cart];
     let newItems = items.filter((item) => {
           if (item.objectId === action.payload) {
               item.quantity-=1;
-              if(item.quantity==0)
+              if(item.quantity===0)
               flag=true;
             }
 
@@ -46,9 +46,9 @@ export const reducer = (state,action) =>
     
   }
 
-  if(action.type=='INCREASE_ITEM')
+  if(action.type==='INCREASE_ITEM')
   {
-    let addedItem=state.menu.find(item=>item.objectId==action.payload)
+    let addedItem=state.menu.find(item=>item.objectId===action.payload)
     let items = [...state.cart];
     
     let newItems = items.filter((item) => {
@@ -67,7 +67,7 @@ export const reducer = (state,action) =>
 
 
 
-  if(action.type=='CLEAR_CART')
+  if(action.type==='CLEAR_CART')
   {
     return{
             ...state,
@@ -86,7 +86,7 @@ export const reducer = (state,action) =>
     // console.log(addedItem,existedItem)
     if(existedItem)
     {
-      let newmenu = state.cart.filter(item => item.objectId != action.payload);
+      let newmenu = state.cart.filter(item => item.objectId !== action.payload);
       ///takes out newly added item
       existedItem.quantity = existedItem.quantity+1;
       newmenu.push(existedItem);
@@ -108,10 +108,10 @@ export const reducer = (state,action) =>
     }
   }
 
-  if(action.type=='REMOVE_ITEM')
+  if(action.type==='REMOVE_ITEM')
   {
     let itemToRemove= state.menu.find(item=>item.objectId===action.payload)
-    let new_items = state.cart.filter(item=> item.objectId!=action.payload)
+    let new_items = state.cart.filter(item=> item.objectId!==action.payload)
         
     //calculating the total
     let newTotal = state.total - (itemToRemove.quantity )

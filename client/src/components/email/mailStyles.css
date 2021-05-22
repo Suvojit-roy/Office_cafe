@@ -1,0 +1,24 @@
+.mail-container .cart-content
+{
+    background-color: white;
+    padding:50px 30px;
+    width:60%;
+    margin:0 auto;
+    border: 1px solid white;
+    border-radius: 5px;
+    text-align: center;
+
+}
+
+.mail-container h3
+{
+    line-height: 1.2em;
+    letter-spacing: 1.5px;
+    font-weight: normal;
+    margin-bottom: 20px;
+}
+
+.mail-container .cart-btn
+{
+    justify-content: center;
+}

@@ -140,11 +140,21 @@ header .navigation li a
 }
 
 
+header .navigation li,header .navigation i
+{
+    color:white
+}
+
+
 header.sticky .navigation li a{
     color:rgb(250, 95, 23);
     align-items: center;
 }
 
+
+header.sticky .navigation li , header.sticky .navigation i{
+    color:rgb(250, 95, 23);
+}
 
 
 header .navigation li a:after {
@@ -446,21 +456,24 @@ section.contact{
 
     }
 
+
     header .navigation li
     {
         margin-left: 0;
     }
+
+
+    header .navigation.active li , header .navigation.active .nav-i 
+    {
+        color:tomato;
+    }
+
 
     header .navigation.active li a
     {
         color:tomato;
         font-size:1.8em;
         font-weight: 300;
-    }
-
-    header .navigation.active .nav-i
-    {
-        color:tomato
     }
 
     .toggle

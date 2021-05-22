@@ -20,6 +20,8 @@ import {reducer} from './reducer'
 
 //react redux - provider wraps app,connect used in components
 import {Provider} from 'react-redux';
+import Email from './components/email/Email';
+import MailSuccess from './components/email/MailSuccess';
 
 
 //store.getstate()
@@ -69,6 +71,9 @@ const Routing = ()=>
     </Route>
     <Route exact path="/cart/:id">
       <Cart/>
+    </Route>
+    <Route exact path="/orderPlaced/:id">
+      <MailSuccess/>
     </Route>
     </Switch>
   )
@@ -127,7 +132,7 @@ function App() {
         });
         setProducts(dataset)
     })
-    .catch(err=>alert(err.error))
+    .catch(err=>console.log(err))
   },[])
   
 
@@ -166,11 +171,12 @@ function App() {
 
 
   return(
+
 <Provider store={store}>
-<BrowserRouter>
+  <BrowserRouter>
 <Routing/>
 </BrowserRouter>
-</Provider>
+</Provider> 
   )
 
 
