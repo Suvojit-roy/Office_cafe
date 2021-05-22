@@ -51,7 +51,7 @@ const Cart = ({items,amount,removeItem,decreaseItem,increaseItem,clearCart}) => 
              body:
              JSON.stringify({
                  to:data,
-                 subject:'Congratulations🎉!',
+                 subject:'Congratulations🎉',
                  html:'<p>Your Order has been Placed.<br/>\
                  Thank you for giving us an opportunity to serve you!\
                  </p>\
