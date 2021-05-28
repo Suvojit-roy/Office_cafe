@@ -9,7 +9,7 @@ const stripe=require("stripe")(STRIPE_ID)
 const { v4: uuidv4 } = require('uuid');
 
 
-const PORT = process.env.PORT || 8000; 
+const PORT = process.env.PORT || 5000; 
 
 mongoose.connect(process.env.MONGODB_URI || 
     MONGO_URI,

@@ -117,7 +117,7 @@ export const reducer = (state,action) =>
     let newTotal = state.total - (itemToRemove.quantity )
     //calculate amount
     let newAmount = state.amount - (itemToRemove.Price * itemToRemove.quantity )
-    console.log(itemToRemove)
+    // console.log(itemToRemove)
     return{
             ...state,
             cart: new_items,

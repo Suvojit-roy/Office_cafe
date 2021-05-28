@@ -18,51 +18,51 @@ const [data,setData]=useState('')
 useEffect(() => {
 
     fetch(`/add/fetchDetails/${userId}`,
-        {
-          method:'GET',
-
-        }).then(res=>res.json())
-        .then(res=>
-          {
-              setData(res.data);
-          })
-        .catch(err=>{
-          console.log(err);
-        })
-
-
-
-   window.onload= function ()
-   {
-    window.addEventListener("scroll", ()=>
     {
-        var header,image,icon,nameSel
-        header = document.getElementById('head');
-        image=document.querySelector('.img-logo');
+            method:'GET',
 
-        //for cart page only
+    }).then(res=>res.json())
+    .then(res=>
+            {
+
+                // console.log(res)
+                setData(res.data);
+            })
+            .catch(err=>{
+            alert(err);
+            })
         
 
-        //when you scroll window
-        header.classList.toggle('sticky',window.scrollY>0);
-            if(header.classList.contains('sticky'))
-            {
-                       image.src=knifeorange;
-                       image.id=''
-            }
-            else
-            {
-                       image.src=blackcrockery;
-                       image.id='invertLogo'
-            }
-        
+//    window.onload= function ()
+//    {
+//         
+window.addEventListener("scroll", ()=>
+        {
+            var header,image,icon,nameSel
+            header = document.getElementById('head');
+            image=document.querySelector('.img-logo');
+
+            //for cart page only
+            
+
+            //when you scroll window
+            header.classList.toggle('sticky',window.scrollY>0);
+            // if(window.scrollY>0) alert(1)
+                if(header.classList.contains('sticky'))
+                {
+                        image.src=knifeorange;
+                        image.id=''
+                }
+                else
+                {
+                        image.src=blackcrockery;
+                        image.id='invertLogo'
+                }
+            
+        // })
     })
 
-   }
-    
-       
-
-}, [])
+},[])
 
 
 

@@ -103,7 +103,7 @@ function App() {
       localStorage.setItem('state', serializedState);
       // console.log(serializedState)
     } catch(err) {
-      console.log(err)
+      alert(err)
     }
   };
 

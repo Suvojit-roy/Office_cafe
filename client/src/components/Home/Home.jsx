@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
-import Navbar from '../Navbar/Navbar'
 import './homeStyles.css'
 import pizza2 from '../../images/pizza2.jpg'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-
-
+import food from '../../images/food.png'
+import Navbar from '../Navbar/Navbar'
 
 const Home = () => {
 
@@ -59,7 +58,7 @@ const Home = () => {
 
 
     return (
-        <div className="home-container">
+  <>
             {loading?
             <div className="spinner">
                 <div class="spinner-grow text-info" 
@@ -71,16 +70,15 @@ const Home = () => {
             </div>
             
             :
-            <div>
-             <Navbar/>
-            
+            <div className="home-container">
+            <Navbar></Navbar>
             <section class="banner" id="banner">
              <div class="content">
-                 <h1>Welcome</h1>
-                 <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used 
-                     in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter 
-                     in the 15th century who is thought to have scrambled parts of Cicero's De 
-                     Finibus Bonorum et Malorum for use in a type specimen book.</p>
+                 <h1>Office Eats</h1>
+                 <p>Welcome to your one stop destination for food ordering!
+                     Order your meals while you sit on your office chairs burdened with the hectic work.We shall serve your meals without any delay.
+                     Here you will find a vast variety of healthy menu items to satisfy your hunger and reduce your work pressure.
+                 </p>
                  <button 
                  type="button" className="btn">
                      <a href="#about">Know More</a></button>
@@ -94,14 +92,11 @@ const Home = () => {
                     </div>
                     <div className="col-lg-5">
                     <h2 class="about-title"><span>A</span>bout Us</h2>
-                        <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used 
-                     in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter 
-                     in the 15th century who is thought to have scrambled parts of Cicero's De 
-                     Finibus Bonorum et Malorum for use in a type specimen book.
-                     Lorem ipsum, or lipsum as it is sometimes known, is dummy text used 
-                     in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter 
-                     in the 15th century who is thought to have scrambled parts of Cicero's De 
-                     Finibus Bonorum et Malorum for use in a type specimen book.</p>
+                        <p>We,at Office Eats are trying to build a platform to help serve the office or building canteens and cater to the employee needs.
+                            Order with us and get your meals delivered super-fast!
+                            Fill in your details by hitting the Order Now button and go ahead and place your order.
+                            Pay your bills using Card Details and give yourself a yummy treat!
+                        </p>
                     </div>
                 </div>
             </section>
@@ -153,6 +148,9 @@ const Home = () => {
                          <button type="submit" class="btn">Submit</button>
                          </form>
  
+                    <div className="contact-img">
+                        <img className="imgc" src={food} height="220" width="280"></img>
+                    </div>
  
  
                         <div className="social-icons">
@@ -170,7 +168,7 @@ const Home = () => {
                 
             </section>
          </div>}
-           </div>
+           </>
     )
 }
 

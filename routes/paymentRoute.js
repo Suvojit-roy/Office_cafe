@@ -5,7 +5,7 @@ const path=require('path')
 const cors=require('cors')
 const http=require('http')
 const router=express.Router();
-const stripe=require("stripe")("sk_test_51IpczwSH2HRN2Fzs9KpJpmMH3VCqaAMVsHLn4g97qdCm3FFjNHKjnESbnWUuOegnC1FHCI6l9OxqY3fr5CBvVqXf007qCfTJBN")
+const stripe=require("stripe")("sk_test_51IpczwSH2HRN2FzsEDNbqB8YgUfdScGZ4RwlycM9EaWeAuCDSqLBuGboLyTMD4Dsu6vdLltmmvxLcsSgAyMckUXs00bnZBYkZk")
 const { v4: uuidv4 } = require('uuid');
 
 

@@ -13,6 +13,7 @@ const User=require("../models/user");
 router.post("/uploadForm",async (req,res,next)=>
 {
     const {name,email,orgName,phone,empID,image}=req.body;
+    console.log(req.body)
         User.findOne({ email })
     	.then((savedUser) => {
         	if (savedUser) {

@@ -55,7 +55,7 @@ const Cart = ({items,amount,removeItem,decreaseItem,increaseItem,clearCart}) => 
                  html:'<p>Your Order has been Placed.<br/>\
                  Thank you for giving us an opportunity to serve you!\
                  </p>\
-                 <h4>Your meal is being preapred and will be delivered at your desk within an \
+                <h4>Your meal is being preapred and will be delivered at your desk within an \
                  hour.Stay healthy,eat healthy!</h4>\
                  <br/>\
                  <strong>Keep ordering!</strong></p>\

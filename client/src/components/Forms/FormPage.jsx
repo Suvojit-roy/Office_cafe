@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button,Form,Modal, Spinner } from 'react-bootstrap';
 import {useHistory} from 'react-router-dom'
@@ -17,6 +17,7 @@ const FormPage=()=>{
     const [previewImg,setPreviewImg]=useState('');
     const [fileName,setFileName]=useState('');
     const [validated, setValidated] = useState(false);
+    const [url,setUrl]=useState('')
     const history=useHistory();
     
     const [loading,setLoading]=useState(false);
@@ -26,7 +27,6 @@ const FormPage=()=>{
 
   //function controlling the modal open/close
   const showModal = (event) => {
-
 
     const form = event.currentTarget;
     if(!previewImg)
@@ -75,18 +75,59 @@ const FormPage=()=>{
   };
 
 
+
+
+
+  useEffect(() => {
+
+    if(url)
+    {
+          fetch("/add/uploadForm",
+          {
+            method:'POST',
+            headers:{
+              'Content-Type':'application/json'
+            },
+        body:JSON.stringify({name,email,empID:eid,orgName:orgname,phone,image:url})
+
+          }).then(res=>res.json())
+          .then(res=>
+          {
+            // console.log(res)
+            if(!res.error)
+            {
+              localStorage.setItem('user',res.data._id)
+              history.push(`/success/${res.data._id}`)
+            }
+            else
+            {
+              //error is displayed on the screen otherwise.
+                setLoading(false);
+                setShow(!show);
+                alert(res.error);
+            }
+        })
+        .catch(err=>{
+          alert(err);
+          setLoading(false);
+        })
+    }
+    
+      
+  }, [url])
+
   //function which handles form data posting to the backend
-    const postform=(e)=>{
+    const postform=async(e)=>{
       
        setLoading(true)
 
        //formdata created
         const formData=new FormData();
         formData.append('file',photo);
-        formData.append('upload_preset','speak-up');
+        formData.append('upload_preset','office-cafe');
         formData.append('cloud_name','ducw5cejx');
 
-         fetch("https://api.cloudinary.com/v1_1/ducw5cejx/image/upload",
+        fetch("https://api.cloudinary.com/v1_1/ducw5cejx/image/upload",
          {
                 method:'post',
                 body:formData
@@ -94,39 +135,9 @@ const FormPage=()=>{
             .then(res=>res.json())
             .then(res=>
             {
+              setUrl(res.url)
+            }).catch(err=>console.log(err))
 
-              
-              fetch("/add/uploadForm",
-             {
-                method:'POST',
-                headers:{
-                  'Content-Type':'application/json'
-                },
-            body:JSON.stringify({name,email,empID:eid,orgName:orgname,phone,image:res.url})
-
-              }).then(res=>res.json())
-              .then(res=>
-              {
-                
-                if(!res.error)
-                {
-                  localStorage.setItem({'user':res.data_id})
-                  history.push(`/success/${res.data._id}`)
-                }
-            else
-            {
-              //error is displayed on the screen otherwise.
-               setLoading(false);
-               setShow(!show);
-               alert(res.error);
-            }
-            })
-          .catch(err=>{
-            alert(err.error);
-            setLoading(false);
-          })
-            })
-            .catch(err=>console.log(err))
         
         //makes a post request to save user details in the database
           

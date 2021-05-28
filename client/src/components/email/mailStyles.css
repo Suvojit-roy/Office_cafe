@@ -22,3 +22,15 @@
 {
     justify-content: center;
 }
+
+
+@media screen and (max-width:900px) {
+
+    .mail-container .cart-content
+    {
+        width: 90%;
+        margin-top: 80px;
+        padding-bottom: 20px;
+    }
+    
+}
