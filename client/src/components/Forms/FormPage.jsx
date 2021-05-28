@@ -82,35 +82,35 @@ const FormPage=()=>{
 
        //formdata created
         const formData=new FormData();
-        // formData.append('userImage',photo);
-        // formData.append('name',name);
-        // formData.append('orgName',orgname);
-        // formData.append('email',email);
-        // formData.append('empID',eid);
-        // formData.append('phone',phone);
+        formData.append('file',photo);
+        formData.append('upload_preset','speak-up');
+        formData.append('cloud_name','ducw5cejx');
 
-        // console.log(formData)
-        // console.log(photo)
-
-        //makes a post request to save user details in the database
-          fetch("/add/uploadForm",
-          {
-            method:'POST',
-            headers:{
-              'Content-Type':'application/json'
-            },
-            body:JSON.stringify({name,email,empID:eid,orgName:orgname,phone})
-
-          }).then(res=>res.json())
-          .then(res=>
+         fetch("https://api.cloudinary.com/v1_1/ducw5cejx/image/upload",
+         {
+                method:'post',
+                body:formData
+         })
+            .then(res=>res.json())
+            .then(res=>
             {
+
+              
+              fetch("/add/uploadForm",
+             {
+                method:'POST',
+                headers:{
+                  'Content-Type':'application/json'
+                },
+            body:JSON.stringify({name,email,empID:eid,orgName:orgname,phone,image:res.url})
+
+              }).then(res=>res.json())
+              .then(res=>
+              {
                 
                 if(!res.error)
                 {
-                  //if no error,redirected to success screen
-
-                  //set data to local storage incase of any netwrok issues
-                  // localStorage.setItem({'user':{res.data_id}})
+                  localStorage.setItem({'user':res.data_id})
                   history.push(`/success/${res.data._id}`)
                 }
             else
@@ -125,6 +125,11 @@ const FormPage=()=>{
             alert(err.error);
             setLoading(false);
           })
+            })
+            .catch(err=>console.log(err))
+        
+        //makes a post request to save user details in the database
+          
         
     }
   

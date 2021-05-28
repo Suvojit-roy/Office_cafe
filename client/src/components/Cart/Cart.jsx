@@ -218,7 +218,7 @@ const Cart = ({items,amount,removeItem,decreaseItem,increaseItem,clearCart}) => 
                     <button onClick={()=>history.goBack()}>
                     Back to Menu Page</button>
                     <StripeCheckout
-                    stripeKey="pk_test_51IpczwSH2HRN2Fzs59J5y9RUg3bWPSzsRmzfX7KqqXeJfkOHfSysZ3ZkzZ1xb6nFKoWLl9OrfhWuyTlpxUt6R5P9008Emj1q8e"
+                    stripeKey="pk_test_51IpczwSH2HRN2FzsAEadI4na29OzXiXK7xPmmvcuj52smWsM1Kx0t8jnz30fU2Jhu9ySRBdpBSRk4vVGDCvwPMYX00har9As6f"
                     token={makePayment}
                     name="Pay for your food"
                     amount={amount}
